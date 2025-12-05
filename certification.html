@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Certificat de Scolarité</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- html2canvas for download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Google Fonts - Signature style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Base64 Logos (évite CORS) -->
+    <script src="assets/js/logos.js"></script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        /* Print styles for certificate */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .certificate-page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Certificate page styling */
+        .certificate-page {
+            font-family: 'Arial', sans-serif;
+            width: 210mm;
+            min-height: 297mm;
+        }
+
+        /* Input focus effect */
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            ring: 2px;
+            ring-color: #6366f1;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 min-h-screen text-white">
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1
+                class="text-4xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                <i class="fas fa-graduation-cap mr-3"></i>Générateur de Certificat
+            </h1>
+            <p class="text-gray-400">Créez des certificats de scolarité professionnels en quelques clics</p>
+        </header>
+
+        <!-- Main Content - Two Columns -->
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Left Column - Form -->
+            <div
+                class="w-full lg:w-2/5 bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+
+                <!-- Generate Random Button - TOP -->
+                <button id="randomizeAllBtn"
+                    class="w-full mb-6 px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:from-indigo-700 hover:to-purple-700 hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] transition-all duration-300">
+                    <i class="fas fa-shuffle mr-2"></i>Générer Aléatoirement
+                </button>
+
+                <div class="space-y-4">
+                    <!-- Établissement Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-400 mb-4"><i
+                                class="fas fa-building-columns mr-2"></i>Établissement</h3>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-image mr-2 text-yellow-400"></i>Logo
+                                </label>
+                                <input type="text" id="logoFilename" readonly
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-sm text-gray-300 cursor-default"
+                                    placeholder="Sélection automatique...">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-school mr-2 text-blue-400"></i>Nom de l'établissement
+                                </label>
+                                <input type="text" id="nomEtablissement"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                                    placeholder="Lycée Exemple">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-location-dot mr-2 text-red-400"></i>Adresse
+                                </label>
+                                <input type="text" id="adresseEtablissement"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                    placeholder="123 Rue de l'École, 75000 Paris">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-barcode mr-2 text-green-400"></i>RNE
+                                    </label>
+                                    <input type="text" id="rne"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                        placeholder="0141169V">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-phone mr-2 text-cyan-400"></i>Téléphone
+                                    </label>
+                                    <input type="text" id="telephone"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                        placeholder="01 23 45 67 89">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étudiant Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-purple-400 mb-4"><i
+                                class="fas fa-user-graduate mr-2"></i>Étudiant</h3>
+
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-user mr-2 text-pink-400"></i>Nom
+                                    </label>
+                                    <input type="text" id="nomEtudiant"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                        placeholder="DUPONT">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-user mr-2 text-pink-400"></i>Prénom
+                                    </label>
+                                    <input type="text" id="prenomEtudiant"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                        placeholder="Jean">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-cake-candles mr-2 text-orange-400"></i>Date de naissance
+                                </label>
+                                <input type="date" id="dateNaissance" title="Date de naissance"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-id-card mr-2 text-teal-400"></i>Identifiant National (INE)
+                                </label>
+                                <input type="text" id="ine"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                    placeholder="120638936GB">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scolarité Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-book mr-2"></i>Scolarité
+                        </h3>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-utensils mr-2 text-amber-400"></i>Régime
+                                </label>
+                                <select id="regime" title="Régime scolaire"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all">
+                                    <option value="DEMI-PENSIONNAIRE">DEMI-PENSIONNAIRE</option>
+                                    <option value="EXTERNE">EXTERNE</option>
+                                    <option value="INTERNE">INTERNE</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-calendar-alt mr-2 text-violet-400"></i>Année scolaire
+                                </label>
+                                <input type="text" id="anneeScolaire"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                    placeholder="2025-2026">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Signature Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-emerald-400 mb-4"><i
+                                class="fas fa-signature mr-2"></i>Signature</h3>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">
+                                    <i class="fas fa-user-tie mr-2 text-lime-400"></i>Nom du Directeur
+                                </label>
+                                <input type="text" id="nomDirecteur"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                    placeholder="M. MARTIN">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-city mr-2 text-sky-400"></i>Ville
+                                    </label>
+                                    <input type="text" id="villeSignature"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
+                                        placeholder="Paris">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                                        <i class="fas fa-calendar mr-2 text-rose-400"></i>Date
+                                    </label>
+                                    <input type="date" id="dateSignature" title="Date de signature"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Button -->
+                <button id="downloadBtn"
+                    class="w-full mt-6 px-6 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl shadow-lg hover:from-emerald-700 hover:to-teal-700 hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] transition-all duration-300">
+                    <i class="fas fa-download mr-2"></i>Télécharger en Image
+                </button>
+            </div>
+
+            <!-- Right Column - Preview -->
+            <div class="w-full lg:w-3/5 flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-gray-300 mb-4"><i class="fas fa-eye mr-2"></i>Aperçu du Certificat
+                </h2>
+
+                <div id="certificateContainer" class="bg-gray-100 p-4 rounded-2xl shadow-2xl">
+                    <!-- Certificate Preview -->
+                    <div id="certificate"
+                        class="certificate-page bg-white p-[2.5cm] shadow-xl text-gray-900 text-[11pt]">
+
+                        <!-- Header -->
+                        <div class="text-center mb-10">
+                            <h1 id="certLogo" class="text-4xl mb-8">"LOGO"</h1>
+
+                            <div class="text-sm space-y-1">
+                                <p id="certAdresse">"Adresse"</p>
+                                <p>RNE n° <span id="certRne">0141169V</span></p>
+                                <p>Tél. : <span id="certTel">01 23 45 67 89</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Blue Title Bar -->
+                        <div class="bg-[#bfd4e9] py-2 px-4 mb-10 text-center border-t border-b border-blue-200">
+                            <h2 class="text-xl font-bold uppercase tracking-wide text-black">CERTIFICAT DE SCOLARITE
+                            </h2>
+                        </div>
+
+                        <!-- Body Text -->
+                        <div class="mb-8">
+                            <p class="leading-relaxed">
+                                Je <span id="certSoussigne">soussigné</span>, <span id="certDirecteurIntro">M(me) Nom
+                                    directeur</span>, <span id="certChefIntro">Chef</span>
+                                d'Etablissement de <span id="certNomEtab">"Nom université"</span>
+                            </p>
+                            <p class="mt-2">Certifie que</p>
+                        </div>
+
+                        <!-- Student Info (Centered) -->
+                        <div class="text-center my-10 space-y-2">
+                            <p class="text-lg font-bold"><span id="certNomPrenom">NOM Prénom</span></p>
+                            <p>né(e) le <span id="certDateNaissance" class="font-bold">01/01/2009</span></p>
+                            <p>Identifiant national: <span id="certIne" class="font-bold">120638936GB</span></p>
+                        </div>
+
+                        <!-- End of Text -->
+                        <div class="space-y-6 mb-12">
+                            <p>
+                                est bien inscrit(e) dans notre établissement <span id="certRegime"
+                                    class="font-bold">sous le régime DEMI-PENSIONNAIRE</span>
+                            </p>
+                            <p>
+                                Pour l'année scolaire <span id="certAnnee">2025-2026</span>
+                            </p>
+                            <p class="mt-8">
+                                Pour faire valoir ce que de droit,
+                            </p>
+                        </div>
+
+                        <!-- Signature Block (Right Aligned) -->
+                        <div class="flex justify-end mt-16">
+                            <div class="text-left w-1/2 relative">
+                                <p class="mb-2">Fait à <span id="certVille">Paris</span>, le <span
+                                        id="certDateSignature">05/12/2025</span></p>
+                                <p class="mb-1"><span id="certChef">Chef</span></p>
+                                <p class="mb-4">d'Etablissement</p>
+                                <p class="mb-2"><span id="certDirecteur">M(me) Nom directeur</span></p>
+
+                                <!-- Signature avec police cursive -->
+                                <p id="certSignature" class="mt-4 text-2xl text-blue-900"
+                                    style="font-family: 'Dancing Script', cursive;"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== EMBEDDED DATA (pour éviter les erreurs CORS avec file://) ==========
+        const etudiantsData = {
+            "prenoms": {
+                "masculins": [
+                    "Lucas", "Hugo", "Louis", "Gabriel", "Raphaël",
+                    "Arthur", "Jules", "Adam", "Léo", "Noah",
+                    "Théo", "Nathan", "Mathis", "Maxime", "Alexandre",
+                    "Antoine", "Baptiste", "Clément", "Enzo", "Étienne",
+                    "Florian", "Guillaume", "Julien", "Kevin", "Léon",
+                    "Mathieu", "Nicolas", "Pierre", "Quentin", "Romain",
+                    "Sébastien", "Thomas", "Victor", "Xavier", "Yann"
+                ],
+                "feminins": [
+                    "Emma", "Louise", "Jade", "Alice", "Chloé",
+                    "Léa", "Manon", "Inès", "Camille", "Sarah",
+                    "Anna", "Lina", "Mila", "Rose", "Zoé",
+                    "Amélie", "Charlotte", "Clara", "Élise", "Eva",
+                    "Juliette", "Laura", "Léonie", "Lucie", "Marie",
+                    "Margot", "Nina", "Océane", "Pauline", "Sophie",
+                    "Valérie", "Victoire", "Yasmine", "Anaïs", "Célia"
+                ]
+            },
+            "noms": [
+                "Martin", "Bernard", "Dubois", "Thomas", "Robert",
+                "Richard", "Petit", "Durand", "Leroy", "Moreau",
+                "Simon", "Laurent", "Lefebvre", "Michel", "Garcia",
+                "David", "Bertrand", "Roux", "Vincent", "Fournier",
+                "Morel", "Girard", "André", "Lefèvre", "Mercier",
+                "Dupont", "Lambert", "Bonnet", "François", "Martinez",
+                "Legrand", "Garnier", "Faure", "Rousseau", "Blanc",
+                "Guerin", "Muller", "Henry", "Roussel", "Nicolas",
+                "Perrin", "Morin", "Mathieu", "Clément", "Gauthier",
+                "Dumont", "Lopez", "Fontaine", "Chevalier", "Robin"
+            ]
+        };
+
+        const universitesData = {
+            "universites": [
+                { "nom": "Lycée Henri IV", "adresse": "23 Rue Clovis, 75005 Paris", "ville": "Paris", "logo": "assets/logos/paris-saclay.svg" },
+                { "nom": "Lycée Louis-le-Grand", "adresse": "123 Rue Saint-Jacques, 75005 Paris", "ville": "Paris", "logo": "assets/logos/sorbonne.svg" },
+                { "nom": "Lycée Condorcet", "adresse": "8 Rue du Havre, 75009 Paris", "ville": "Paris", "logo": "assets/logos/paris-cite.svg" },
+                { "nom": "Lycée Jean-Baptiste Say", "adresse": "11 Bis Rue d'Auteuil, 75016 Paris", "ville": "Paris", "logo": "assets/logos/paris-saclay.svg" },
+                { "nom": "Lycée Pasteur", "adresse": "21 Boulevard d'Inkermann, 92200 Neuilly-sur-Seine", "ville": "Neuilly-sur-Seine", "logo": "assets/logos/paris-cite.svg" },
+                { "nom": "Lycée Ampère", "adresse": "31 Rue de la Bourse, 69002 Lyon", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
+                { "nom": "Lycée du Parc", "adresse": "1 Boulevard Anatole France, 69006 Lyon", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
+                { "nom": "Lycée Thiers", "adresse": "5 Place du Lycée, 13001 Marseille", "ville": "Marseille", "logo": "assets/logos/aix-marseille.svg" },
+                { "nom": "Lycée Clemenceau", "adresse": "1 Rue Georges Clemenceau, 44000 Nantes", "ville": "Nantes", "logo": "assets/logos/nantes.svg" },
+                { "nom": "Lycée Montaigne", "adresse": "118 Cours Victor Hugo, 33000 Bordeaux", "ville": "Bordeaux", "logo": "assets/logos/bordeaux.svg" },
+                { "nom": "Lycée Pierre de Fermat", "adresse": "1 Rue Laromiguière, 31000 Toulouse", "ville": "Toulouse", "logo": "assets/logos/toulouse.svg" },
+                { "nom": "Lycée Faidherbe", "adresse": "9 Rue Armand Carrel, 59000 Lille", "ville": "Lille", "logo": "assets/logos/lille.svg" },
+                { "nom": "Lycée Kléber", "adresse": "25 Place de Bordeaux, 67000 Strasbourg", "ville": "Strasbourg", "logo": "assets/logos/strasbourg.svg" },
+                { "nom": "Lycée Champollion", "adresse": "1 Cours Lafontaine, 38000 Grenoble", "ville": "Grenoble", "logo": "assets/logos/grenoble.svg" },
+                { "nom": "Lycée Masséna", "adresse": "2 Avenue Félix Faure, 06000 Nice", "ville": "Nice", "logo": "assets/logos/nice.svg" }
+            ]
+        };
+
+        // Liste de tous les logos disponibles
+        const availableLogos = [
+            "assets/logos/aix-marseille.svg",
+            "assets/logos/bordeaux.svg",
+            "assets/logos/grenoble.svg",
+            "assets/logos/lille.svg",
+            "assets/logos/lorraine.svg",
+            "assets/logos/lyon.svg",
+            "assets/logos/montpellier.svg",
+            "assets/logos/nantes.svg",
+            "assets/logos/nice.svg",
+            "assets/logos/paris-cite.svg",
+            "assets/logos/paris-saclay.svg",
+            "assets/logos/rennes.svg",
+            "assets/logos/sorbonne.svg",
+            "assets/logos/strasbourg.svg",
+            "assets/logos/toulouse.svg"
+        ];
+
+        // ========== RANDOM HELPERS ==========
+        function randomFromArray(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function padZero(num, size) {
+            return String(num).padStart(size, '0');
+        }
+
+        // ========== GENERATE RNE ==========
+        function generateRNE() {
+            // Département (01-95 ou 971-976)
+            const dept = padZero(randomInt(1, 95), 3);
+            // Numéro ordre
+            const ordre = padZero(randomInt(1, 9999), 4);
+            // Clé de contrôle (lettre)
+            const numTotal = parseInt(dept + ordre);
+            const cle = String.fromCharCode(65 + (numTotal % 23)); // A-W (skip I, O, Q)
+            return dept + ordre + cle;
+        }
+
+        // ========== GENERATE INE ==========
+        function generateINE(birthYear) {
+            // Les 2 premiers chiffres = année entrée maternelle (naissance + 3)
+            const entreeMaternelle = (birthYear + 3) % 100;
+            const prefix = padZero(entreeMaternelle, 2);
+
+            // 7 chiffres aléatoires
+            const random7 = padZero(randomInt(0, 9999999), 7);
+
+            // Numéro complet (9 chiffres)
+            const number9 = prefix + random7;
+
+            // Calcul clé modulo 97
+            const reste = parseInt(number9) % 97;
+            const cleNum = 97 - reste;
+
+            // Conversion en 2 lettres
+            const lettre1 = String.fromCharCode(65 + Math.floor(cleNum / 10));
+            const lettre2 = String.fromCharCode(65 + (cleNum % 10));
+
+            return number9 + lettre1 + lettre2;
+        }
+
+        // ========== GENERATE PHONE ==========
+        function generatePhone() {
+            const prefixes = ['01', '02', '03', '04', '05'];
+            const prefix = randomFromArray(prefixes);
+            const nums = [];
+            for (let i = 0; i < 4; i++) {
+                nums.push(padZero(randomInt(0, 99), 2));
+            }
+            return prefix + ' ' + nums.join(' ');
+        }
+
+        // ========== FORMAT DATE ==========
+        function formatDateFR(dateStr) {
+            const date = new Date(dateStr);
+            const day = padZero(date.getDate(), 2);
+            const month = padZero(date.getMonth() + 1, 2);
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // ========== GENERATE RANDOM DATA ==========
+        function generateRandom() {
+            console.log('🎲 Génération aléatoire...');
+
+            // Random gender
+            const isMale = Math.random() > 0.5;
+            const prenoms = isMale ? etudiantsData.prenoms.masculins : etudiantsData.prenoms.feminins;
+
+            // Random student
+            const prenom = randomFromArray(prenoms);
+            const nom = randomFromArray(etudiantsData.noms);
+
+            // Random university
+            const universite = randomFromArray(universitesData.universites);
+
+            // Random birth date (2006-2010)
+            const birthYear = randomInt(2006, 2010);
+            const birthMonth = padZero(randomInt(1, 12), 2);
+            const birthDay = padZero(randomInt(1, 28), 2);
+            const birthDate = `${birthYear}-${birthMonth}-${birthDay}`;
+
+            // Random director (with gender)
+            const directorIsMale = Math.random() > 0.5;
+            const directorNom = randomFromArray(etudiantsData.noms);
+            const directorPrefix = directorIsMale ? 'M.' : 'Mme';
+            window.currentDirectorIsMale = directorIsMale; // Stocker pour updatePreview
+
+            // Set today's date for signature
+            const today = new Date().toISOString().split('T')[0];
+
+            // Get logo filename based on city
+            const cityToLogo = {
+                'Paris': 'paris-saclay.svg',
+                'Lyon': 'lyon.svg',
+                'Marseille': 'aix-marseille.svg',
+                'Nantes': 'nantes.svg',
+                'Bordeaux': 'bordeaux.svg',
+                'Toulouse': 'toulouse.svg',
+                'Lille': 'lille.svg',
+                'Strasbourg': 'strasbourg.svg',
+                'Grenoble': 'grenoble.svg',
+                'Nice': 'nice.svg',
+                'Neuilly-sur-Seine': 'paris-cite.svg'
+            };
+            const logoFilename = cityToLogo[universite.ville] || 'sorbonne.svg';
+
+            // Fill form
+            document.getElementById('nomEtablissement').value = universite.nom;
+            document.getElementById('adresseEtablissement').value = universite.adresse;
+            document.getElementById('rne').value = generateRNE();
+            document.getElementById('telephone').value = generatePhone();
+            document.getElementById('nomEtudiant').value = nom.toUpperCase();
+            document.getElementById('prenomEtudiant').value = prenom;
+            document.getElementById('dateNaissance').value = birthDate;
+            document.getElementById('ine').value = generateINE(birthYear);
+            document.getElementById('regime').value = randomFromArray(['DEMI-PENSIONNAIRE', 'EXTERNE', 'INTERNE']);
+            document.getElementById('anneeScolaire').value = '2025-2026';
+            document.getElementById('nomDirecteur').value = `${directorPrefix} ${directorNom.toUpperCase()}`;
+            document.getElementById('villeSignature').value = universite.ville;
+            document.getElementById('dateSignature').value = today;
+            document.getElementById('logoFilename').value = logoFilename;
+
+            // Display logo from university (avec rasterisation Base64 → PNG)
+            const logoPath = `assets/logos/${logoFilename}`;
+            setLogo(logoPath);
+
+            // Update preview
+            updatePreview();
+            console.log('✅ Génération terminée');
+        }
+
+        // ========== UPDATE PREVIEW ==========
+        function updatePreview() {
+            const nom = document.getElementById('nomEtudiant').value;
+            const prenom = document.getElementById('prenomEtudiant').value;
+            const nomEtab = document.getElementById('nomEtablissement').value;
+            const adresse = document.getElementById('adresseEtablissement').value;
+            const rne = document.getElementById('rne').value;
+            const tel = document.getElementById('telephone').value;
+            const dateNaissance = document.getElementById('dateNaissance').value;
+            const ine = document.getElementById('ine').value;
+            const regime = document.getElementById('regime').value;
+            const annee = document.getElementById('anneeScolaire').value;
+            const directeur = document.getElementById('nomDirecteur').value;
+            const ville = document.getElementById('villeSignature').value;
+            const dateSign = document.getElementById('dateSignature').value;
+
+            // Update certificate
+            document.getElementById('certNomEtab').textContent = nomEtab || '"Nom université"';
+            document.getElementById('certAdresse').textContent = adresse || '"Adresse"';
+            document.getElementById('certRne').textContent = rne || '0000000X';
+            document.getElementById('certTel').textContent = tel || '00 00 00 00 00';
+            document.getElementById('certNomPrenom').textContent = `${nom} ${prenom}` || 'NOM Prénom';
+            document.getElementById('certDateNaissance').textContent = dateNaissance ? formatDateFR(dateNaissance) : '01/01/2009';
+            document.getElementById('certIne').textContent = ine || '000000000AA';
+            document.getElementById('certRegime').textContent = `sous le régime ${regime}`;
+            document.getElementById('certAnnee').textContent = annee || '2025-2026';
+            document.getElementById('certDirecteurIntro').textContent = directeur || 'M(me) Nom directeur';
+            document.getElementById('certDirecteur').textContent = directeur || 'M(me) Nom directeur';
+            document.getElementById('certVille').textContent = ville || 'Ville';
+            document.getElementById('certDateSignature').textContent = dateSign ? formatDateFR(dateSign) : '01/01/2025';
+
+            // Chef / Cheffe et soussigné / soussignée selon le genre du directeur
+            const isMaleDirector = directeur.startsWith('M.') || window.currentDirectorIsMale === true;
+            document.getElementById('certSoussigne').textContent = isMaleDirector ? 'soussigné' : 'soussignée';
+            document.getElementById('certChefIntro').textContent = isMaleDirector ? 'Chef' : 'Cheffe';
+            document.getElementById('certChef').textContent = isMaleDirector ? 'Chef' : 'Cheffe';
+
+            // Signature avec police cursive - extrait le nom sans "M. " ou "Mme "
+            const signatureName = directeur ? directeur.replace(/^M\.\s*|^Mme\s*/i, '') : 'Signature';
+            document.getElementById('certSignature').textContent = signatureName;
+        }
+
+        // ========== SET LOGO WITH RASTERIZATION ==========
+        // Charge le logo depuis Base64 (logos.js), le rasterise en PNG via Canvas
+        function setLogo(logoPath) {
+            const logoEl = document.getElementById('certLogo');
+
+            // 1. Récupérer la version Base64 depuis window.CERT_LOGOS
+            let source = logoPath;
+            if (window.CERT_LOGOS && window.CERT_LOGOS[logoPath]) {
+                source = window.CERT_LOGOS[logoPath];
+                console.log('🖼️ Logo trouvé en Base64:', logoPath);
+            } else {
+                console.warn('⚠️ Logo non trouvé en Base64, utilisation chemin direct');
+            }
+
+            // 2. Créer une image temporaire
+            const img = new Image();
+
+            img.onload = function () {
+                // 3. Canvas pour rasteriser
+                const canvas = document.createElement('canvas');
+                canvas.width = 200;
+                canvas.height = 200;
+                const ctx = canvas.getContext('2d');
+
+                // 4. Dessiner (rasterization SVG → pixels)
+                ctx.drawImage(img, 0, 0, 200, 200);
+
+                // 5. Extraire en PNG data URL
+                const pngDataUrl = canvas.toDataURL('image/png');
+
+                // 6. Afficher le PNG rasterisé
+                logoEl.innerHTML = `<img src="${pngDataUrl}" alt="Logo" class="h-24 mx-auto">`;
+                console.log('✅ Logo rasterisé');
+            };
+
+            img.onerror = function () {
+                console.warn('⚠️ Erreur chargement logo');
+                logoEl.innerHTML = '<div style="font-size: 20px; font-weight: bold; text-align: center; padding: 20px; color: #1e3a5f;">LOGO</div>';
+            };
+
+            img.src = source;
+        }
+
+        // ========== DOWNLOAD AS IMAGE ==========
+        async function downloadCertificate() {
+            const certificate = document.getElementById('certificate');
+            console.log('📥 Démarrage du téléchargement...');
+
+            try {
+                // Capture avec html2canvas
+                const canvas = await html2canvas(certificate, {
+                    scale: 3, // Haute résolution pour qualité A4
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    onclone: function (clonedDoc) {
+                        // Ajuster le titre pour le centrage vertical (-8px pour monter)
+                        const title = clonedDoc.querySelector('#certificate h2');
+                        if (title) {
+                            title.style.transform = 'translateY(-8px)';
+                        }
+                    }
+                });
+
+
+                // Télécharger
+                const link = document.createElement('a');
+                const nom = document.getElementById('nomEtudiant').value || 'certificat';
+                const prenom = document.getElementById('prenomEtudiant').value || '';
+                link.download = `certificat_${nom}_${prenom}.png`.toLowerCase().replace(/\s+/g, '_');
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+
+                console.log('✅ Téléchargement réussi');
+
+            } catch (error) {
+                console.error('❌ Erreur téléchargement:', error);
+                alert('Erreur lors du téléchargement. Vérifiez la console (F12) pour plus de détails.');
+            }
+        }
+
+        // ========== INIT ==========
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('✅ Données intégrées chargées');
+
+            // Setup event listeners
+            document.getElementById('randomizeAllBtn').addEventListener('click', generateRandom);
+            document.getElementById('downloadBtn').addEventListener('click', downloadCertificate);
+
+            // Live update on input change
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', updatePreview);
+                input.addEventListener('change', updatePreview);
+            });
+
+            // Generate random data on load
+            generateRandom();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="gradLI" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c62828;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ef5350;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="15" y="15" width="170" height="170" rx="20" fill="url(#gradLI)"/>
+  <rect x="25" y="25" width="150" height="150" rx="15" fill="none" stroke="white" stroke-width="2"/>
+  <text x="100" y="65" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Arial">UNIVERSITÉ</text>
+  <text x="100" y="90" text-anchor="middle" fill="white" font-size="10" font-family="Arial">DE</text>
+  <text x="100" y="125" text-anchor="middle" fill="#ffd700" font-size="32" font-weight="bold" font-family="Arial">LILLE</text>
+  <path d="M60 150 L100 165 L140 150" stroke="white" stroke-width="2" fill="none"/>
+</svg>
+

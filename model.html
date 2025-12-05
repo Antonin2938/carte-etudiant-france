@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificat de Scolarité</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuration pour l'impression */
+        @media print {
+            body {
+                background: white;
+            }
+            .page-shadow {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+            /* Force l'impression des couleurs de fond (la barre bleue) */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+        
+        /* Police similaire aux documents administratifs */
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
+
+    <!-- Bouton d'impression (visible uniquement à l'écran) -->
+    <div class="no-print mb-6">
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition">
+            Imprimer / Enregistrer en PDF
+        </button>
+    </div>
+
+    <!-- La feuille A4 -->
+    <div class="page-shadow bg-white w-full max-w-[21cm] min-h-[29.7cm] p-[2.5cm] shadow-xl relative mx-auto text-gray-900 text-[11pt]">
+        
+        <!-- En-tête -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl mb-8">“LOGO”</h1>
+            
+            <div class="text-sm space-y-1">
+                <p>“Adresse”</p>
+                <p>RNE n° “7chiffres auhasard"V</p>
+                <p>Tél. : “tel”</p>
+            </div>
+        </div>
+
+        <!-- Titre Bleu -->
+        <div class="bg-[#bfd4e9] py-2 px-4 mb-10 text-center border-t border-b border-blue-200">
+            <h2 class="text-xl font-bold uppercase tracking-wide text-black">CERTIFICAT DE SCOLARITE</h2>
+        </div>
+
+        <!-- Corps du texte -->
+        <div class="mb-8">
+            <p class="leading-relaxed">
+                Je soussignée, M(me) "Nom directeur" , Chef(fe) d’Etablissement de "Nom université"
+            </p>
+            <p class="mt-2">Certifie que</p>
+        </div>
+
+        <!-- Informations Élève (Centré) -->
+        <div class="text-center my-10 space-y-2">
+            <p class="text-lg font-bold">“Nom” Prénom”</p>
+            <p>né(e) le <span class="font-bold">“date”</span></p>
+            <p>Identifiant national: <span class="font-bold">"9 chiffres au hasard"GB</span></p>
+        </div>
+
+        <!-- Fin du texte -->
+        <div class="space-y-6 mb-12">
+            <p>
+                est bien inscrit(e) dans notre établissement <span class="font-bold">sous le régime DEMI-PENSIONNAIRE</span>
+            </p>
+            <!-- Suppression de la classe 'font-bold' -->
+            <p>
+                Pour l’année scolaire 2025-2026
+            </p>
+            <p class="mt-8">
+                Pour faire valoir ce que de droit,
+            </p>
+        </div>
+
+        <!-- Bloc Signature (Aligné à droite) -->
+        <div class="flex justify-end mt-16">
+            <div class="text-left w-1/2 relative">
+                <p class="mb-2">Fait à “ville”, le “jour”</p>
+                <p class="mb-1">“mois” 2025 Chef(fe)</p>
+                <p class="mb-4">d’Etablissement</p>
+                <p class="mb-2">M(me) "Nom directeur"</p>
+
+                <!-- Remplacement de la signature graphique par du texte -->
+                <p class="mt-12 italic text-gray-500">Signature</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

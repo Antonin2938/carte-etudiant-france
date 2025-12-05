@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="gradMO" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="88" fill="url(#gradMO)"/>
+  <text x="100" y="60" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Arial">UNIVERSITÉ DE</text>
+  <text x="100" y="95" text-anchor="middle" fill="#ffd700" font-size="16" font-weight="bold" font-family="Arial">MONTPELLIER</text>
+  <rect x="40" y="110" width="120" height="3" fill="white"/>
+  <text x="100" y="145" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="serif">UM</text>
+  <circle cx="100" cy="165" r="8" fill="#ffd700"/>
+</svg>
+

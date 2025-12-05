@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E35205;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="85" fill="url(#grad5)"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="white" stroke-width="2"/>
+  <text x="100" y="70" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Arial">UNIVERSITÉ</text>
+  <text x="100" y="90" text-anchor="middle" fill="white" font-size="10" font-family="Arial">DE</text>
+  <text x="100" y="115" text-anchor="middle" fill="white" font-size="18" font-weight="bold" font-family="Arial">TOULOUSE</text>
+  <path d="M60 135 L100 150 L140 135" stroke="white" stroke-width="2" fill="none"/>
+  <circle cx="100" cy="160" r="8" fill="white"/>
+</svg>
+

@@ -1,0 +1,245 @@
+# Prompt - Générateur de Certificats de Scolarité
+
+## Objectif
+Créer un générateur de certificats de scolarité web, similaire à `student id.html` mais pour des attestations.
+
+---
+
+## Fichiers de Référence
+
+1. **Modèle HTML du certificat :** `model.html` — Le design exact à reproduire et rendre dynamique.
+2. **Données JSON disponibles** (dossier `data/`) :
+   - `etudiants.json` — Noms, prénoms, dates de naissance
+   - `adresses.json` — Villes, adresses complètes
+   - `universites.json` — Noms d'établissements, coordonnées
+3. **Référence existante :** `student id.html` — Logique à réutiliser (boutons, génération aléatoire, téléchargement).
+
+---
+
+## Comportement au Chargement
+
+- **Au chargement de la page**, une version aléatoire du certificat est **automatiquement générée** avec des données tirées des fichiers JSON.
+- L'utilisateur voit immédiatement un certificat pré-rempli sans avoir à cliquer sur quoi que ce soit.
+
+---
+
+## Fonctionnalités Requises
+
+### 1. Interface à Deux Colonnes
+
+**Colonne Gauche (Formulaire) :**
+- **Bouton "Générer Aléatoirement" en HAUT du bloc** — Re-génère toutes les données aléatoirement depuis les JSON à chaque clic.
+- Champs modifiables :
+  - Logo (upload)
+  - Adresse de l'établissement
+  - RNE (7 chiffres aléatoires + "V")
+  - Téléphone
+  - Nom du directeur
+  - Nom de l'établissement
+  - Nom et prénom de l'étudiant
+  - Date de naissance
+  - Identifiant national (9 chiffres aléatoires + "GB")
+  - Régime (ex: DEMI-PENSIONNAIRE, EXTERNE)
+  - Année scolaire
+  - Ville et date de signature
+
+**Colonne Droite (Prévisualisation) :**
+- Affichage en direct du certificat (design identique à `model.html`).
+- Mise à jour instantanée quand les champs changent.
+
+### 2. Bouton de Téléchargement
+
+- **Téléchargement en IMAGE uniquement** (PNG ou JPG), PAS de PDF.
+- Utilise `html2canvas` pour capturer le certificat.
+
+---
+
+## Stack Technique
+
+- HTML5
+- Tailwind CSS (CDN)
+- JavaScript vanilla
+- Librairie : `html2canvas`
+
+---
+
+## Design & Esthétique
+
+Le site doit être **visuellement premium et moderne**, pas un simple formulaire basique.
+
+**Principes de design :**
+
+1. **Palette de couleurs** :
+   - Fond : dégradé sombre (slate/gray) ou fond clair élégant
+   - Accents : couleurs vibrantes (indigo, purple, cyan)
+   - Contraste élevé pour la lisibilité
+
+2. **Effets visuels** :
+   - Ombres portées (`shadow-xl`, `shadow-2xl`)
+   - Bordures subtiles avec `border` et `ring`
+   - Dégradés (`bg-gradient-to-r`, `bg-gradient-to-br`)
+   - Coins arrondis (`rounded-lg`, `rounded-xl`)
+
+3. **Animations & Interactions** :
+   - Transitions fluides sur les boutons (`transition-all duration-300`)
+   - Effets hover : changement de couleur, scale, shadow
+   - Effets active : `scale-95` pour feedback tactile
+
+4. **Boutons** :
+   - Dégradés colorés (ex: `from-indigo-600 to-purple-600`)
+   - Icônes Font Awesome
+   - Hover avec `hover:scale-105` et `hover:shadow-lg`
+
+5. **Formulaire** :
+   - Inputs avec bordures subtiles et focus states
+   - Labels avec icônes colorées
+   - Espacement généreux (`space-y-4`)
+
+6. **Preview du certificat** :
+   - Encadré avec une ombre pour effet "document posé"
+   - Fond légèrement différent de la colonne formulaire
+
+**Référence visuelle :** S'inspirer du style de `student id.html` (dark mode élégant, dégradés, micro-animations).
+
+---
+
+## Structure des Fichiers
+
+```
+Certifs Generator/
+├── certification.html      ← Page principale du générateur
+├── model.html              ← Référence visuelle du certificat
+├── prompt.txt              ← Ce fichier
+├── data/
+│   ├── etudiants.json
+│   ├── adresses.json
+│   └── universites.json
+└── assets/
+    └── (logos, photos, etc.)
+```
+
+---
+
+## Structure des Fichiers JSON
+
+### `etudiants.json`
+```json
+{
+    "prenoms": {
+        "masculins": ["Lucas", "Hugo", "Louis", ...],
+        "feminins": ["Emma", "Louise", "Jade", ...]
+    },
+    "noms": ["Martin", "Bernard", "Dubois", ...],
+    "filieres": ["Informatique", "Droit", "Médecine", ...]
+}
+```
+
+### `universites.json`
+```json
+{
+    "universites": [
+        {
+            "nom": "Université Paris-Saclay",
+            "adresse": "3 Rue Joliot Curie, 91190 Gif-sur-Yvette",
+            "ville": "Gif-sur-Yvette",
+            "codePostal": "91190",
+            "website": "www.universite-paris-saclay.fr",
+            "logo": "assets/logos/paris-saclay.svg",
+            "domaine": "universite-paris-saclay.fr"
+        }
+    ]
+}
+```
+
+### `adresses.json`
+```json
+{
+    "adresses": [
+        {
+            "rue": "12 Rue de la Paix",
+            "ville": "Paris",
+            "codePostal": "75002"
+        }
+    ]
+}
+```
+
+---
+
+## Format des Dates
+
+Toutes les dates doivent être affichées au **format français** : `JJ/MM/AAAA`
+
+Exemples :
+- Date de naissance : `15/03/2009`
+- Date de signature : `05/12/2025`
+
+---
+
+## Calcul Intelligent de l'INE
+
+Les **2 premiers chiffres** de l'INE doivent correspondre à l'année d'entrée en maternelle :
+
+**Formule :** `Année de naissance + 3`
+
+| Année de naissance | Entrée maternelle | Début INE |
+|--------------------|-------------------|-----------|
+| 2006               | 2009              | `09`      |
+| 2007               | 2010              | `10`      |
+| 2008               | 2011              | `11`      |
+| 2009               | 2012              | `12`      |
+| 2010               | 2013              | `13`      |
+
+**Exemple :** Un élève né le 15/03/2009 aura un INE commençant par `12` (car 2009 + 3 = 2012).
+
+---
+
+## Documentation Technique des Codes
+
+### 1. Le numéro RNE (ex: 0141169V)
+
+Le **RNE** (Répertoire National des Établissements), aussi appelé **code UAI**, est la "carte d'identité" de l'établissement.
+
+**À quoi ça sert ?**
+Il permet à l'administration (Ministère, Rectorat) d'identifier l'établissement de manière unique pour les examens, les dotations budgétaires, etc.
+
+**Comment il est généré (Algorithme) :**
+
+- `014` : Code du département géographique (ici Calvados = 14), précédé d'un zéro.
+- `1169` : Numéro d'ordre unique attribué à l'établissement lors de sa création.
+- `V` : **Clé de contrôle** calculée par un algorithme mathématique (basé sur l'alphabet). Elle vérifie que les chiffres précédents sont corrects.
+
+**Pour la génération aléatoire :**
+- Générer 3 chiffres pour le département (001-095 ou 971-976 pour DOM-TOM)
+- Générer 4 chiffres aléatoires (0001-9999)
+- Calculer la clé de contrôle (lettre A-Z)
+
+---
+
+### 2. L'Identifiant National Élève - INE (ex: 120638936GB)
+
+C'est l'**Identifiant National Élève** (parfois appelé BEA ou INES). C'est le numéro le plus important pour l'élève.
+
+**À quoi ça sert ?**
+Il suit l'élève de l'école primaire jusqu'à la fin des études supérieures. C'est ce numéro qu'on utilise pour Parcoursup et l'inscription au Bac.
+
+**Comment il est généré :**
+
+Format standardisé depuis 2018 : **9 chiffres + 2 lettres**
+
+- `120638936` : Numéro de dossier unique dans le répertoire national (RNIE). Les 2 premiers chiffres correspondent souvent à l'année de première inscription à l'école.
+- `GB` : **Clés de contrôle** calculées selon un algorithme modulo 97 pour éviter les erreurs de saisie.
+
+**Pour la génération aléatoire :**
+- Générer 9 chiffres aléatoires
+- Calculer les 2 lettres de contrôle (algorithme modulo 97)
+
+---
+
+## Résumé
+
+1. Page avec 2 colonnes : formulaire à gauche, preview à droite.
+2. Au chargement : certificat pré-rempli aléatoirement.
+3. Bouton "Générer Aléatoirement" en haut du formulaire pour re-générer.
+4. Chaque modification de champ met à jour la preview en temps réel.
+5. Bouton "Télécharger" pour sauvegarder en image (html2canvas).

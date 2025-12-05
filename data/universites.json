@@ -1,0 +1,139 @@
+{
+    "universites": [
+        {
+            "nom": "Université Paris-Saclay",
+            "adresse": "Bâtiment Bréguet, 3 Rue Joliot Curie, 91190 Gif-sur-Yvette",
+            "ville": "Gif-sur-Yvette",
+            "codePostal": "91190",
+            "website": "www.universite-paris-saclay.fr",
+            "logo": "assets/logos/paris-saclay.svg",
+            "domaine": "universite-paris-saclay.fr"
+        },
+        {
+            "nom": "Sorbonne Université",
+            "adresse": "21 Rue de l'École de Médecine, 75006 Paris",
+            "ville": "Paris",
+            "codePostal": "75006",
+            "website": "www.sorbonne-universite.fr",
+            "logo": "assets/logos/sorbonne.svg",
+            "domaine": "sorbonne-universite.fr"
+        },
+        {
+            "nom": "Université de Lyon",
+            "adresse": "92 Rue Pasteur, 69007 Lyon",
+            "ville": "Lyon",
+            "codePostal": "69007",
+            "website": "www.universite-lyon.fr",
+            "logo": "assets/logos/lyon.svg",
+            "domaine": "univ-lyon.fr"
+        },
+        {
+            "nom": "Université de Bordeaux",
+            "adresse": "35 Place Pey Berland, 33000 Bordeaux",
+            "ville": "Bordeaux",
+            "codePostal": "33000",
+            "website": "www.u-bordeaux.fr",
+            "logo": "assets/logos/bordeaux.svg",
+            "domaine": "u-bordeaux.fr"
+        },
+        {
+            "nom": "Université de Toulouse",
+            "adresse": "41 Allées Jules Guesde, 31000 Toulouse",
+            "ville": "Toulouse",
+            "codePostal": "31000",
+            "website": "www.univ-toulouse.fr",
+            "logo": "assets/logos/toulouse.svg",
+            "domaine": "univ-toulouse.fr"
+        },
+        {
+            "nom": "Aix-Marseille Université",
+            "adresse": "58 Boulevard Charles Livon, 13007 Marseille",
+            "ville": "Marseille",
+            "codePostal": "13007",
+            "website": "www.univ-amu.fr",
+            "logo": "assets/logos/aix-marseille.svg",
+            "domaine": "univ-amu.fr"
+        },
+        {
+            "nom": "Université de Strasbourg",
+            "adresse": "4 Rue Blaise Pascal, 67081 Strasbourg",
+            "ville": "Strasbourg",
+            "codePostal": "67081",
+            "website": "www.unistra.fr",
+            "logo": "assets/logos/strasbourg.svg",
+            "domaine": "unistra.fr"
+        },
+        {
+            "nom": "Nantes Université",
+            "adresse": "1 Quai de Tourville, 44035 Nantes",
+            "ville": "Nantes",
+            "codePostal": "44035",
+            "website": "www.univ-nantes.fr",
+            "logo": "assets/logos/nantes.svg",
+            "domaine": "univ-nantes.fr"
+        },
+        {
+            "nom": "Université de Montpellier",
+            "adresse": "163 Rue Auguste Broussonnet, 34090 Montpellier",
+            "ville": "Montpellier",
+            "codePostal": "34090",
+            "website": "www.umontpellier.fr",
+            "logo": "assets/logos/montpellier.svg",
+            "domaine": "umontpellier.fr"
+        },
+        {
+            "nom": "Université de Lille",
+            "adresse": "42 Rue Paul Duez, 59000 Lille",
+            "ville": "Lille",
+            "codePostal": "59000",
+            "website": "www.univ-lille.fr",
+            "logo": "assets/logos/lille.svg",
+            "domaine": "univ-lille.fr"
+        },
+        {
+            "nom": "Université de Rennes",
+            "adresse": "2 Rue du Thabor, 35000 Rennes",
+            "ville": "Rennes",
+            "codePostal": "35000",
+            "website": "www.univ-rennes.fr",
+            "logo": "assets/logos/rennes.svg",
+            "domaine": "univ-rennes.fr"
+        },
+        {
+            "nom": "Université Grenoble Alpes",
+            "adresse": "621 Avenue Centrale, 38400 Saint-Martin-d'Hères",
+            "ville": "Grenoble",
+            "codePostal": "38400",
+            "website": "www.univ-grenoble-alpes.fr",
+            "logo": "assets/logos/grenoble.svg",
+            "domaine": "univ-grenoble-alpes.fr"
+        },
+        {
+            "nom": "Université Côte d'Azur",
+            "adresse": "28 Avenue de Valrose, 06108 Nice",
+            "ville": "Nice",
+            "codePostal": "06108",
+            "website": "www.univ-cotedazur.fr",
+            "logo": "assets/logos/nice.svg",
+            "domaine": "univ-cotedazur.fr"
+        },
+        {
+            "nom": "Université de Lorraine",
+            "adresse": "34 Cours Léopold, 54000 Nancy",
+            "ville": "Nancy",
+            "codePostal": "54000",
+            "website": "www.univ-lorraine.fr",
+            "logo": "assets/logos/lorraine.svg",
+            "domaine": "univ-lorraine.fr"
+        },
+        {
+            "nom": "Université Paris Cité",
+            "adresse": "85 Boulevard Saint-Germain, 75006 Paris",
+            "ville": "Paris",
+            "codePostal": "75006",
+            "website": "www.u-paris.fr",
+            "logo": "assets/logos/paris-cite.svg",
+            "domaine": "u-paris.fr"
+        }
+    ]
+}

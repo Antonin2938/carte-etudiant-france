@@ -1,0 +1,61 @@
+{
+    "prenoms": {
+        "masculins": [
+            "Lucas", "Hugo", "Louis", "Gabriel", "Raphaël",
+            "Arthur", "Jules", "Adam", "Léo", "Noah",
+            "Théo", "Nathan", "Mathis", "Maxime", "Alexandre",
+            "Antoine", "Baptiste", "Clément", "Enzo", "Étienne",
+            "Florian", "Guillaume", "Julien", "Kevin", "Léon",
+            "Mathieu", "Nicolas", "Pierre", "Quentin", "Romain",
+            "Sébastien", "Thomas", "Victor", "Xavier", "Yann"
+        ],
+        "feminins": [
+            "Emma", "Louise", "Jade", "Alice", "Chloé",
+            "Léa", "Manon", "Inès", "Camille", "Sarah",
+            "Anna", "Lina", "Mila", "Rose", "Zoé",
+            "Amélie", "Charlotte", "Clara", "Élise", "Eva",
+            "Juliette", "Laura", "Léonie", "Lucie", "Marie",
+            "Margot", "Nina", "Océane", "Pauline", "Sophie",
+            "Valérie", "Victoire", "Yasmine", "Anaïs", "Célia"
+        ]
+    },
+    "noms": [
+        "Martin", "Bernard", "Dubois", "Thomas", "Robert",
+        "Richard", "Petit", "Durand", "Leroy", "Moreau",
+        "Simon", "Laurent", "Lefebvre", "Michel", "Garcia",
+        "David", "Bertrand", "Roux", "Vincent", "Fournier",
+        "Morel", "Girard", "André", "Lefèvre", "Mercier",
+        "Dupont", "Lambert", "Bonnet", "François", "Martinez",
+        "Legrand", "Garnier", "Faure", "Rousseau", "Blanc",
+        "Guerin", "Muller", "Henry", "Roussel", "Nicolas",
+        "Perrin", "Morin", "Mathieu", "Clément", "Gauthier",
+        "Dumont", "Lopez", "Fontaine", "Chevalier", "Robin"
+    ],
+    "filieres": [
+        "Informatique",
+        "Mathématiques",
+        "Physique",
+        "Chimie",
+        "Biologie",
+        "Médecine",
+        "Droit",
+        "Économie",
+        "Gestion",
+        "Lettres Modernes",
+        "Histoire",
+        "Géographie",
+        "Philosophie",
+        "Psychologie",
+        "Sociologie",
+        "Sciences Politiques",
+        "Langues Étrangères",
+        "Arts Plastiques",
+        "Musicologie",
+        "STAPS",
+        "Génie Civil",
+        "Électronique",
+        "Mécanique",
+        "Architecture"
+    ]
+}
+

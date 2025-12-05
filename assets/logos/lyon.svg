@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003366;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0055A4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <polygon points="100,10 180,60 180,140 100,190 20,140 20,60" fill="url(#grad3)"/>
+  <text x="100" y="80" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Arial">UNIVERSITÉ</text>
+  <text x="100" y="100" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Arial">DE</text>
+  <text x="100" y="125" text-anchor="middle" fill="#ffd700" font-size="20" font-weight="bold" font-family="Arial">LYON</text>
+  <circle cx="100" cy="155" r="15" fill="none" stroke="#ffd700" stroke-width="2"/>
+</svg>
+
