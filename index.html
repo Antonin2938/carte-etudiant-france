@@ -401,21 +401,22 @@
 
         const universitesData = {
             "universites": [
-                { "nom": "Lycée Henri IV", "adresse": "23 Rue Clovis, 75005 Paris", "ville": "Paris", "logo": "assets/logos/paris-saclay.svg" },
-                { "nom": "Lycée Louis-le-Grand", "adresse": "123 Rue Saint-Jacques, 75005 Paris", "ville": "Paris", "logo": "assets/logos/sorbonne.svg" },
-                { "nom": "Lycée Condorcet", "adresse": "8 Rue du Havre, 75009 Paris", "ville": "Paris", "logo": "assets/logos/paris-cite.svg" },
-                { "nom": "Lycée Jean-Baptiste Say", "adresse": "11 Bis Rue d'Auteuil, 75016 Paris", "ville": "Paris", "logo": "assets/logos/paris-saclay.svg" },
-                { "nom": "Lycée Pasteur", "adresse": "21 Boulevard d'Inkermann, 92200 Neuilly-sur-Seine", "ville": "Neuilly-sur-Seine", "logo": "assets/logos/paris-cite.svg" },
-                { "nom": "Lycée Ampère", "adresse": "31 Rue de la Bourse, 69002 Lyon", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
-                { "nom": "Lycée du Parc", "adresse": "1 Boulevard Anatole France, 69006 Lyon", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
-                { "nom": "Lycée Thiers", "adresse": "5 Place du Lycée, 13001 Marseille", "ville": "Marseille", "logo": "assets/logos/aix-marseille.svg" },
-                { "nom": "Lycée Clemenceau", "adresse": "1 Rue Georges Clemenceau, 44000 Nantes", "ville": "Nantes", "logo": "assets/logos/nantes.svg" },
-                { "nom": "Lycée Montaigne", "adresse": "118 Cours Victor Hugo, 33000 Bordeaux", "ville": "Bordeaux", "logo": "assets/logos/bordeaux.svg" },
-                { "nom": "Lycée Pierre de Fermat", "adresse": "1 Rue Laromiguière, 31000 Toulouse", "ville": "Toulouse", "logo": "assets/logos/toulouse.svg" },
-                { "nom": "Lycée Faidherbe", "adresse": "9 Rue Armand Carrel, 59000 Lille", "ville": "Lille", "logo": "assets/logos/lille.svg" },
-                { "nom": "Lycée Kléber", "adresse": "25 Place de Bordeaux, 67000 Strasbourg", "ville": "Strasbourg", "logo": "assets/logos/strasbourg.svg" },
-                { "nom": "Lycée Champollion", "adresse": "1 Cours Lafontaine, 38000 Grenoble", "ville": "Grenoble", "logo": "assets/logos/grenoble.svg" },
-                { "nom": "Lycée Masséna", "adresse": "2 Avenue Félix Faure, 06000 Nice", "ville": "Nice", "logo": "assets/logos/nice.svg" }
+                { "nom": "Université Paris-Saclay", "adresse": "3 Rue Joliot Curie, 91190 Gif-sur-Yvette", "ville": "Paris", "logo": "assets/logos/paris-saclay.svg" },
+                { "nom": "Sorbonne Université", "adresse": "21 Rue de l'École de Médecine, 75006 Paris", "ville": "Paris", "logo": "assets/logos/sorbonne.svg" },
+                { "nom": "Université Paris Cité", "adresse": "85 Boulevard Saint-Germain, 75006 Paris", "ville": "Paris", "logo": "assets/logos/paris-cite.svg" },
+                { "nom": "Université Claude Bernard Lyon 1", "adresse": "43 Boulevard du 11 Novembre 1918, 69100 Villeurbanne", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
+                { "nom": "Université Lumière Lyon 2", "adresse": "86 Rue Pasteur, 69007 Lyon", "ville": "Lyon", "logo": "assets/logos/lyon.svg" },
+                { "nom": "Aix-Marseille Université", "adresse": "58 Boulevard Charles Livon, 13007 Marseille", "ville": "Marseille", "logo": "assets/logos/aix-marseille.svg" },
+                { "nom": "Université de Nantes", "adresse": "1 Quai de Tourville, 44000 Nantes", "ville": "Nantes", "logo": "assets/logos/nantes.svg" },
+                { "nom": "Université de Bordeaux", "adresse": "35 Place Pey Berland, 33000 Bordeaux", "ville": "Bordeaux", "logo": "assets/logos/bordeaux.svg" },
+                { "nom": "Université Toulouse III - Paul Sabatier", "adresse": "118 Route de Narbonne, 31062 Toulouse", "ville": "Toulouse", "logo": "assets/logos/toulouse.svg" },
+                { "nom": "Université de Lille", "adresse": "42 Rue Paul Duez, 59000 Lille", "ville": "Lille", "logo": "assets/logos/lille.svg" },
+                { "nom": "Université de Strasbourg", "adresse": "4 Rue Blaise Pascal, 67000 Strasbourg", "ville": "Strasbourg", "logo": "assets/logos/strasbourg.svg" },
+                { "nom": "Université Grenoble Alpes", "adresse": "621 Avenue Centrale, 38400 Saint-Martin-d'Hères", "ville": "Grenoble", "logo": "assets/logos/grenoble.svg" },
+                { "nom": "Université Côte d'Azur", "adresse": "28 Avenue Valrose, 06108 Nice", "ville": "Nice", "logo": "assets/logos/nice.svg" },
+                { "nom": "Université de Montpellier", "adresse": "163 Rue Auguste Broussonnet, 34090 Montpellier", "ville": "Montpellier", "logo": "assets/logos/montpellier.svg" },
+                { "nom": "Université de Lorraine", "adresse": "34 Cours Léopold, 54000 Nancy", "ville": "Nancy", "logo": "assets/logos/lorraine.svg" },
+                { "nom": "Université de Rennes 1", "adresse": "2 Rue du Thabor, 35000 Rennes", "ville": "Rennes", "logo": "assets/logos/rennes.svg" }
             ]
         };
 
@@ -548,7 +549,9 @@
                 'Strasbourg': 'strasbourg.svg',
                 'Grenoble': 'grenoble.svg',
                 'Nice': 'nice.svg',
-                'Neuilly-sur-Seine': 'paris-cite.svg'
+                'Montpellier': 'montpellier.svg',
+                'Nancy': 'lorraine.svg',
+                'Rennes': 'rennes.svg'
             };
             const logoFilename = cityToLogo[universite.ville] || 'sorbonne.svg';
 
