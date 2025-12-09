@@ -1,108 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificat de Scolarité</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Configuration pour l'impression */
-        @media print {
-            body {
-                background: white;
-            }
-            .page-shadow {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                max-width: 100%;
-            }
-            .no-print {
-                display: none;
-            }
-            /* Force l'impression des couleurs de fond (la barre bleue) */
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-        }
-        
-        /* Police similaire aux documents administratifs */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ddd;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 40px 50px;
+            background-color: #f5f5dc;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h3 {
+            margin: 2px 0;
+            font-weight: normal;
+        }
+
+        .header h1 {
+            margin: 20px 0;
+            text-decoration: underline;
+        }
+
+        .header h2 {
+            font-weight: normal;
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+
+        .content {
+            line-height: 2.2;
+        }
+
+        .content p {
+            margin: 0;
+        }
+
+        .field {
+            display: inline;
+        }
+
+        .certification-box {
+            margin: 20px 0;
+            padding-left: 15px;
+            border-left: 2px solid #000;
+            line-height: 2;
+        }
+
+        .certification-box p {
+            margin: 0;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 80px;
+        }
+
+        .footer-left,
+        .footer-right {
+            width: 48%;
+        }
+
+        .footer-left p {
+            margin: 15px 0;
+        }
+
+        .footer-right p {
+            margin: 15px 0;
+        }
+
+        .footer-right {
+            text-align: center;
+        }
+
+        .signature-box {
+            border: 1px solid #000;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 80px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .note {
+            font-size: 0.8em;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .signataire-info {
+            margin-bottom: 25px;
+        }
+
+        .payment-info {
+            margin-top: 25px;
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
 
-    <!-- Bouton d'impression (visible uniquement à l'écran) -->
-    <div class="no-print mb-6">
-        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition">
-            Imprimer / Enregistrer en PDF
-        </button>
-    </div>
+<body>
+    <div class="page">
+        <div class="header">
+            <h3>CAISSE NATIONALE DE SECURITE SOCIALE</h3>
+            <h3>B.P. 374 COTONOU</h3>
+            <hr style="width: 50px; margin: 10px auto;">
+            <h1>CERTIFICAT DE SCOLARITE</h1>
+            <h2>ANNEE SCOLAIRE 2005.. 2006.</h2>
+        </div>
 
-    <!-- La feuille A4 -->
-    <div class="page-shadow bg-white w-full max-w-[21cm] min-h-[29.7cm] p-[2.5cm] shadow-xl relative mx-auto text-gray-900 text-[11pt]">
-        
-        <!-- En-tête -->
-        <div class="text-center mb-10">
-            <h1 class="text-4xl mb-8">“LOGO”</h1>
-            
-            <div class="text-sm space-y-1">
-                <p>“Adresse”</p>
-                <p>RNE n° “7chiffres auhasard"V</p>
-                <p>Tél. : “tel”</p>
+        <div class="content">
+            <p>Je soussigné Directeur <span class="field">"Nom directeur"</span></p>
+            <p>Certifie <span class="field">"Prénom"</span></p>
+            <p>que l<span class="field">a</span>. nommé (e) <span class="field">"Prénom"</span></p>
+            <p>Agé de <span class="field">"age"</span> ans</p>
+            <p>suit assidûment les cours de <span class="field">"mathiere"</span></p>
+            <p>dans mon établissement où il ou elle est inscrit depuis</p>
+            <p>le <span class="field">../../2025</span> expire le <span class="field">../../2026</span></p>
+        </div>
+
+        <div class="certification-box">
+            <p>Je certifie</p>
+            <p>qu'<span class="field">"Il/elle"</span> ne bénéficie pas (1)</p>
+            <p>qu'<span class="field">"Il/elle"</span> bénéficie (1) d'une bourse d'entretien</p>
+        </div>
+
+        <div class="footer">
+            <div class="footer-left">
+                <div class="signataire-info">
+                    <p><small>(Nom-Prénoms-Titre<br>et qualité du Signataire)</small></p>
+                </div>
+
+                <div class="payment-info">
+                    <p><strong>Mode de paiement</strong></p>
+                    <p><strong>BOA - BIBE - FINANCIAL BANK</strong></p>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <p><small>Nº d'Immatriculation à la caisse du père (ou de la mère)<br>de l'enfant ou des
+                            enfants.</small></p>
+                    <p style="margin-top: 20px;"><span class="field" style="color: red;">"numéro aléatoire"</span></p>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <p>Fait à <span class="field">"Ville"</span></p>
+                <p>Le <span class="field">../../2025</span></p>
+                <p style="margin-top: 30px;"><strong>Signature et cachet</strong></p>
+                <div class="signature-box">Signature</div>
             </div>
         </div>
 
-        <!-- Titre Bleu -->
-        <div class="bg-[#bfd4e9] py-2 px-4 mb-10 text-center border-t border-b border-blue-200">
-            <h2 class="text-xl font-bold uppercase tracking-wide text-black">CERTIFICAT DE SCOLARITE</h2>
-        </div>
-
-        <!-- Corps du texte -->
-        <div class="mb-8">
-            <p class="leading-relaxed">
-                Je soussignée, M(me) "Nom directeur" , Chef(fe) d’Etablissement de "Nom université"
-            </p>
-            <p class="mt-2">Certifie que</p>
-        </div>
-
-        <!-- Informations Élève (Centré) -->
-        <div class="text-center my-10 space-y-2">
-            <p class="text-lg font-bold">“Nom” Prénom”</p>
-            <p>né(e) le <span class="font-bold">“date”</span></p>
-            <p>Identifiant national: <span class="font-bold">"9 chiffres au hasard"GB</span></p>
-        </div>
-
-        <!-- Fin du texte -->
-        <div class="space-y-6 mb-12">
-            <p>
-                est bien inscrit(e) dans notre établissement <span class="font-bold">sous le régime DEMI-PENSIONNAIRE</span>
-            </p>
-            <!-- Suppression de la classe 'font-bold' -->
-            <p>
-                Pour l’année scolaire 2025-2026
-            </p>
-            <p class="mt-8">
-                Pour faire valoir ce que de droit,
-            </p>
-        </div>
-
-        <!-- Bloc Signature (Aligné à droite) -->
-        <div class="flex justify-end mt-16">
-            <div class="text-left w-1/2 relative">
-                <p class="mb-2">Fait à “ville”, le “jour”</p>
-                <p class="mb-1">“mois” 2025 Chef(fe)</p>
-                <p class="mb-4">d’Etablissement</p>
-                <p class="mb-2">M(me) "Nom directeur"</p>
-
-                <!-- Remplacement de la signature graphique par du texte -->
-                <p class="mt-12 italic text-gray-500">Signature</p>
-            </div>
-        </div>
-
+        <p class="note">(1) Rayer la mention inutile</p>
     </div>
 </body>
+
 </html>

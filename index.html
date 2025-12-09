@@ -211,13 +211,17 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-sm font-medium text-gray-300 mb-1">
-                                    <i class="fas fa-utensils mr-2 text-amber-400"></i>Régime
+                                    <i class="fas fa-graduation-cap mr-2 text-purple-400"></i>Classe / Matière
                                 </label>
-                                <select id="regime" title="Régime scolaire"
+                                <select id="matiere" title="Classe ou matière"
                                     class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all">
-                                    <option value="DEMI-PENSIONNAIRE">DEMI-PENSIONNAIRE</option>
-                                    <option value="EXTERNE">EXTERNE</option>
-                                    <option value="INTERNE">INTERNE</option>
+                                    <option value="Terminale Générale">Terminale Générale</option>
+                                    <option value="Première Générale">Première Générale</option>
+                                    <option value="Seconde Générale">Seconde Générale</option>
+                                    <option value="Terminale Technologique">Terminale Technologique</option>
+                                    <option value="Première Technologique">Première Technologique</option>
+                                    <option value="BTS 1ère année">BTS 1ère année</option>
+                                    <option value="BTS 2ème année">BTS 2ème année</option>
                                 </select>
                             </div>
 
@@ -227,7 +231,7 @@
                                 </label>
                                 <input type="text" id="anneeScolaire"
                                     class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:border-indigo-500 transition-all"
-                                    placeholder="2025-2026">
+                                    placeholder="2025 - 2026">
                             </div>
                         </div>
                     </div>
@@ -281,73 +285,77 @@
                 </h2>
 
                 <div id="certificateContainer" class="bg-gray-100 p-4 rounded-2xl shadow-2xl">
-                    <!-- Certificate Preview -->
-                    <div id="certificate"
-                        class="certificate-page bg-white p-[2.5cm] shadow-xl text-gray-900 text-[11pt]">
+                    <!-- Certificate Preview - New Model -->
+                    <div id="certificate" class="certificate-page bg-[#f5f5dc] p-[40px] shadow-xl text-gray-900"
+                        style="font-family: 'Times New Roman', serif; line-height: 2.2;">
 
                         <!-- Header -->
-                        <div class="text-center mb-10">
-                            <h1 id="certLogo" class="text-4xl mb-8">"LOGO"</h1>
-
-                            <div class="text-sm space-y-1">
-                                <p id="certAdresse">"Adresse"</p>
-                                <p>RNE n° <span id="certRne">0141169V</span></p>
-                                <p>Tél. : <span id="certTel">01 23 45 67 89</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Blue Title Bar -->
-                        <div class="bg-[#bfd4e9] py-2 px-4 mb-10 text-center border-t border-b border-blue-200">
-                            <h2 class="text-xl font-bold uppercase tracking-wide text-black">CERTIFICAT DE SCOLARITE
+                        <div class="text-center mb-8">
+                            <h3 class="text-base font-normal m-0" id="certNomEtab">ACADÉMIE DE PARIS</h3>
+                            <h3 class="text-base font-normal m-0" id="certAdresse">12 Boulevard d'Indochine, 75019 Paris
+                            </h3>
+                            <hr class="w-12 mx-auto my-3 border-black">
+                            <h1 class="text-2xl font-bold underline my-5">CERTIFICAT DE SCOLARITE</h1>
+                            <h2 class="text-lg font-normal my-4">ANNEE SCOLAIRE <span id="certAnnee">2025 - 2026</span>
                             </h2>
                         </div>
 
-                        <!-- Body Text -->
-                        <div class="mb-8">
-                            <p class="leading-relaxed">
-                                Je <span id="certSoussigne">soussigné</span>, <span id="certDirecteurIntro">M(me) Nom
-                                    directeur</span>, <span id="certChefIntro">Chef</span>
-                                d'Etablissement de <span id="certNomEtab">"Nom université"</span>
-                            </p>
-                            <p class="mt-2">Certifie que</p>
+                        <!-- Content -->
+                        <div class="content">
+                            <p class="m-0">Je soussigné <span id="certSoussigne">Directeur</span> <span
+                                    id="certDirecteurIntro" class="font-medium">"Nom directeur"</span></p>
+                            <p class="m-0">Certifie que <span id="certIlElle">le</span> nommé(e) <span
+                                    id="certNomPrenom" class="font-medium">"NOM Prénom"</span></p>
+                            <p class="m-0">Agé(e) de <span id="certAge" class="font-medium">"18"</span> ans</p>
+                            <p class="m-0">suit assidûment les cours de <span id="certMatiere"
+                                    class="font-medium">"Terminale Générale"</span></p>
+                            <p class="m-0">dans mon établissement où il/elle est inscrit(e) depuis</p>
+                            <p class="m-0">le <span id="certDateInscription" class="font-medium">01/09/2025</span>
+                                expire le <span id="certDateExpiration" class="font-medium">30/06/2026</span></p>
                         </div>
 
-                        <!-- Student Info (Centered) -->
-                        <div class="text-center my-10 space-y-2">
-                            <p class="text-lg font-bold"><span id="certNomPrenom">NOM Prénom</span></p>
-                            <p>né(e) le <span id="certDateNaissance" class="font-bold">01/01/2009</span></p>
-                            <p>Identifiant national: <span id="certIne" class="font-bold">120638936GB</span></p>
-                        </div>
-
-                        <!-- End of Text -->
-                        <div class="space-y-6 mb-12">
-                            <p>
-                                est bien inscrit(e) dans notre établissement <span id="certRegime"
-                                    class="font-bold">sous le régime DEMI-PENSIONNAIRE</span>
-                            </p>
-                            <p>
-                                Pour l'année scolaire <span id="certAnnee">2025-2026</span>
-                            </p>
-                            <p class="mt-8">
-                                Pour faire valoir ce que de droit,
+                        <!-- Certification Box -->
+                        <div class="my-5 pl-4 border-l-2 border-black" style="line-height: 2;">
+                            <p class="m-0">Je certifie</p>
+                            <p class="m-0">qu'<span id="certIlElle2">il</span> ne bénéficie pas (1)</p>
+                            <p class="m-0">qu'<span id="certIlElle3">il</span> bénéficie (1) d'une bourse d'entretien
                             </p>
                         </div>
 
-                        <!-- Signature Block (Right Aligned) -->
-                        <div class="flex justify-end mt-16">
-                            <div class="text-left w-1/2 relative">
-                                <p class="mb-2">Fait à <span id="certVille">Paris</span>, le <span
-                                        id="certDateSignature">05/12/2025</span></p>
-                                <p class="mb-1"><span id="certChef">Chef</span></p>
-                                <p class="mb-4">d'Etablissement</p>
-                                <p class="mb-2"><span id="certDirecteur">M(me) Nom directeur</span></p>
+                        <!-- Footer -->
+                        <div class="flex justify-between mt-20">
+                            <!-- Left Footer -->
+                            <div class="w-[48%]">
+                                <div class="mb-6">
+                                    <p class="m-0"><small>(Nom-Prénoms-Titre<br>et qualité du Signataire)</small></p>
+                                </div>
 
-                                <!-- Signature avec police cursive -->
-                                <p id="certSignature" class="mt-4 text-2xl text-blue-900"
-                                    style="font-family: 'Dancing Script', cursive;"></p>
+                                <div class="mt-6">
+                                    <p class="m-0 font-bold">Mode de paiement</p>
+                                    <p class="m-0 font-bold">Virement - Chèque - Espèces</p>
+                                </div>
+
+                                <div class="mt-8">
+                                    <p class="m-0"><small>N° d'Immatriculation à la CAF ou<br>Sécurité Sociale du
+                                            responsable légal</small></p>
+                                    <p class="mt-5"><span id="certNumImmat" class="text-red-600 font-medium">"numéro
+                                            aléatoire"</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Right Footer -->
+                            <div class="w-[48%] text-center">
+                                <p class="m-0">Fait à <span id="certVille" class="font-medium">Paris</span></p>
+                                <p class="m-0">Le <span id="certDateSignature" class="font-medium">09/12/2025</span></p>
+                                <p class="mt-8 font-bold">Signature et cachet</p>
+                                <div class="border border-black p-4 mt-5 min-h-[80px] flex items-center justify-center">
+                                    <span id="certSignature" class="text-2xl text-blue-900"
+                                        style="font-family: 'Dancing Script', cursive;">Signature</span>
+                                </div>
                             </div>
                         </div>
 
+                        <p class="text-sm text-center mt-16">(1) Rayer la mention inutile</p>
                     </div>
                 </div>
             </div>
@@ -553,12 +561,15 @@
             document.getElementById('prenomEtudiant').value = prenom;
             document.getElementById('dateNaissance').value = birthDate;
             document.getElementById('ine').value = generateINE(birthYear);
-            document.getElementById('regime').value = randomFromArray(['DEMI-PENSIONNAIRE', 'EXTERNE', 'INTERNE']);
-            document.getElementById('anneeScolaire').value = '2025-2026';
+            document.getElementById('matiere').value = randomFromArray(['Terminale Générale', 'Première Générale', 'Seconde Générale', 'Terminale Technologique']);
+            document.getElementById('anneeScolaire').value = '2025 - 2026';
             document.getElementById('nomDirecteur').value = `${directorPrefix} ${directorNom.toUpperCase()}`;
             document.getElementById('villeSignature').value = universite.ville;
             document.getElementById('dateSignature').value = today;
             document.getElementById('logoFilename').value = logoFilename;
+
+            // Store student gender for preview
+            window.currentStudentIsMale = isMale;
 
             // Display logo from university (avec rasterisation Base64 → PNG)
             const logoPath = `assets/logos/${logoFilename}`;
@@ -575,38 +586,53 @@
             const prenom = document.getElementById('prenomEtudiant').value;
             const nomEtab = document.getElementById('nomEtablissement').value;
             const adresse = document.getElementById('adresseEtablissement').value;
-            const rne = document.getElementById('rne').value;
-            const tel = document.getElementById('telephone').value;
             const dateNaissance = document.getElementById('dateNaissance').value;
-            const ine = document.getElementById('ine').value;
-            const regime = document.getElementById('regime').value;
+            const matiere = document.getElementById('matiere').value;
             const annee = document.getElementById('anneeScolaire').value;
             const directeur = document.getElementById('nomDirecteur').value;
             const ville = document.getElementById('villeSignature').value;
             const dateSign = document.getElementById('dateSignature').value;
 
-            // Update certificate
-            document.getElementById('certNomEtab').textContent = nomEtab || '"Nom université"';
-            document.getElementById('certAdresse').textContent = adresse || '"Adresse"';
-            document.getElementById('certRne').textContent = rne || '0000000X';
-            document.getElementById('certTel').textContent = tel || '00 00 00 00 00';
+            // Calculate age
+            let age = 18;
+            if (dateNaissance) {
+                const birthDate = new Date(dateNaissance);
+                const today = new Date();
+                age = today.getFullYear() - birthDate.getFullYear();
+            }
+
+            // Generate CAF/SS number
+            const numImmat = `${randomInt(1, 2)} ${padZero(randomInt(1, 99), 2)} ${padZero(randomInt(1, 12), 2)} ${padZero(randomInt(1, 95), 2)} ${padZero(randomInt(1, 999), 3)} ${padZero(randomInt(1, 999), 3)} ${padZero(randomInt(1, 99), 2)}`;
+
+            // Update certificate header
+            document.getElementById('certNomEtab').textContent = nomEtab || 'ACADÉMIE DE PARIS';
+            document.getElementById('certAdresse').textContent = adresse || '12 Boulevard d\'Indochine, 75019 Paris';
+            document.getElementById('certAnnee').textContent = annee || '2025 - 2026';
+
+            // Update certificate content
             document.getElementById('certNomPrenom').textContent = `${nom} ${prenom}` || 'NOM Prénom';
-            document.getElementById('certDateNaissance').textContent = dateNaissance ? formatDateFR(dateNaissance) : '01/01/2009';
-            document.getElementById('certIne').textContent = ine || '000000000AA';
-            document.getElementById('certRegime').textContent = `sous le régime ${regime}`;
-            document.getElementById('certAnnee').textContent = annee || '2025-2026';
-            document.getElementById('certDirecteurIntro').textContent = directeur || 'M(me) Nom directeur';
-            document.getElementById('certDirecteur').textContent = directeur || 'M(me) Nom directeur';
-            document.getElementById('certVille').textContent = ville || 'Ville';
-            document.getElementById('certDateSignature').textContent = dateSign ? formatDateFR(dateSign) : '01/01/2025';
+            document.getElementById('certAge').textContent = age;
+            document.getElementById('certMatiere').textContent = matiere || 'Terminale Générale';
+            document.getElementById('certDateInscription').textContent = '01/09/2025';
+            document.getElementById('certDateExpiration').textContent = '30/06/2026';
 
-            // Chef / Cheffe et soussigné / soussignée selon le genre du directeur
+            // Director and signature
             const isMaleDirector = directeur.startsWith('M.') || window.currentDirectorIsMale === true;
-            document.getElementById('certSoussigne').textContent = isMaleDirector ? 'soussigné' : 'soussignée';
-            document.getElementById('certChefIntro').textContent = isMaleDirector ? 'Chef' : 'Cheffe';
-            document.getElementById('certChef').textContent = isMaleDirector ? 'Chef' : 'Cheffe';
+            document.getElementById('certSoussigne').textContent = isMaleDirector ? 'Directeur' : 'Directrice';
+            document.getElementById('certDirecteurIntro').textContent = directeur || 'M. Nom directeur';
 
-            // Signature avec police cursive - extrait le nom sans "M. " ou "Mme "
+            // Student pronouns (il/elle)
+            const isMaleStudent = window.currentStudentIsMale === true;
+            document.getElementById('certIlElle').textContent = isMaleStudent ? 'le' : 'la';
+            document.getElementById('certIlElle2').textContent = isMaleStudent ? 'il' : 'elle';
+            document.getElementById('certIlElle3').textContent = isMaleStudent ? 'il' : 'elle';
+
+            // Footer
+            document.getElementById('certVille').textContent = ville || 'Paris';
+            document.getElementById('certDateSignature').textContent = dateSign ? formatDateFR(dateSign) : '09/12/2025';
+            document.getElementById('certNumImmat').textContent = numImmat;
+
+            // Signature cursive
             const signatureName = directeur ? directeur.replace(/^M\.\s*|^Mme\s*/i, '') : 'Signature';
             document.getElementById('certSignature').textContent = signatureName;
         }
