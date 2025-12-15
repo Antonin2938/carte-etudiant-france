@@ -143,6 +143,9 @@
                 <button id="modeK12" class="mode-btn" onclick="switchMode('K12')">
                     🇺🇸 Pay Stub K12
                 </button>
+                <button id="modeUS" class="mode-btn" onclick="switchMode('US')">
+                    🎓 US Enrollment
+                </button>
             </div>
         </header>
 
@@ -428,6 +431,176 @@
                                         class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
                                         value="40">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Enrollment Form (hidden by default) -->
+                <div id="formUS" class="space-y-4" style="display: none;">
+                    <!-- University Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-blue-400 mb-4"><i
+                                class="fas fa-university mr-2"></i>University</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">University Name</label>
+                                <select id="usUniversityName"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Address</label>
+                                <input type="text" id="usUniversityAddress" readonly
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg text-gray-300 cursor-default"
+                                    placeholder="Auto-filled based on university">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-purple-400 mb-4"><i
+                                class="fas fa-user-graduate mr-2"></i>Student</h3>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">First Name</label>
+                                    <input type="text" id="usFirstName"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        placeholder="John">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Last Name</label>
+                                    <input type="text" id="usLastName"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        placeholder="Smith">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Date of Birth</label>
+                                    <input type="date" id="usDateOfBirth"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Student ID (9
+                                        digits)</label>
+                                    <input type="text" id="usStudentId" maxlength="9"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        placeholder="123456789">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-cyan-400 mb-4"><i class="fas fa-book mr-2"></i>Academic
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Major/Program</label>
+                                    <select id="usMajor"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Degree Program</label>
+                                    <select id="usDegree"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Enrollment
+                                        Status</label>
+                                    <select id="usEnrollmentStatus"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                        <option>Full-time</option>
+                                        <option>Part-time</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Academic
+                                        Standing</label>
+                                    <select id="usAcademicStanding"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                        <option>Good Standing</option>
+                                        <option>Dean's List</option>
+                                        <option>Honors</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Expected Graduation</label>
+                                <input type="text" id="usExpectedGraduation"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                    placeholder="May 2027">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Term Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-green-400 mb-4"><i
+                                class="fas fa-calendar-alt mr-2"></i>Academic Term</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Current Term</label>
+                                <select id="usAcademicTerm"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                    <option>Fall 2025</option>
+                                    <option>Spring 2025</option>
+                                    <option>Summer 2025</option>
+                                    <option>Fall 2024</option>
+                                    <option>Spring 2026</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Term Start Date</label>
+                                    <input type="date" id="usTermStart"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Term End Date</label>
+                                    <input type="date" id="usTermEnd"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Registrar Section -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-emerald-400 mb-4"><i
+                                class="fas fa-signature mr-2"></i>Registrar</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Registrar Name</label>
+                                <input type="text" id="usRegistrarName"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                    placeholder="Dr. Jane Smith">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Date Issued</label>
+                                <input type="date" id="usDateIssued"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Purpose</label>
+                                <select id="usPurpose"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                    <option>employment verification</option>
+                                    <option>visa purposes</option>
+                                    <option>financial aid verification</option>
+                                    <option>insurance purposes</option>
+                                    <option>scholarship application</option>
+                                    <option>housing application</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -738,6 +911,87 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- US Enrollment Certificate Preview (hidden by default) -->
+                <div id="usEnrollmentContainer" class="bg-gray-100 p-4 rounded-2xl shadow-2xl" style="display: none;">
+                    <!-- Certificate Preview - Same format as FR but in English -->
+                    <div id="usEnrollment" class="certificate-page bg-[#f5f5dc] p-[40px] shadow-xl text-gray-900"
+                        style="font-family: 'Times New Roman', serif; line-height: 2.2;">
+
+                        <!-- Header -->
+                        <div class="text-center mb-8">
+                            <h3 class="text-base font-normal m-0" id="usDisplayUniversity">HARVARD UNIVERSITY</h3>
+                            <h3 class="text-base font-normal m-0" id="usDisplayAddress">Massachusetts Hall, Cambridge,
+                                MA 02138
+                            </h3>
+                            <hr class="w-12 mx-auto my-3 border-black">
+                            <h1 class="text-2xl font-bold underline my-5">ENROLLMENT CERTIFICATE</h1>
+                            <h2 class="text-lg font-normal my-4">ACADEMIC YEAR <span id="usDisplayAcademicYear">2025 -
+                                    2026</span>
+                            </h2>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="content">
+                            <p class="m-0">I, the undersigned <span id="usDisplayRegistrarTitle">Registrar</span> <span
+                                    id="usDisplayRegistrarIntro" class="font-medium">"Registrar Name"</span></p>
+                            <p class="m-0">Hereby certify that <span id="usDisplayHeOrShe">the</span> student named
+                                <span id="usDisplayFullName" class="font-medium">"LAST NAME First Name"</span>
+                            </p>
+                            <p class="m-0">Aged <span id="usDisplayAge" class="font-medium">"21"</span> years old</p>
+                            <p class="m-0">is regularly attending <span id="usDisplayDegree"
+                                    class="font-medium">"Bachelor of Science"</span> courses</p>
+                            <p class="m-0">in <span id="usDisplayMajor" class="font-medium">"Computer Science"</span> at
+                                my institution where he/she has been enrolled since</p>
+                            <p class="m-0">the <span id="usDisplayEnrollmentDate" class="font-medium">08/25/2025</span>
+                                expiring on <span id="usDisplayExpirationDate" class="font-medium">05/15/2026</span></p>
+                        </div>
+
+                        <!-- Certification Box -->
+                        <div class="my-5 pl-4 border-l-2 border-black" style="line-height: 2;">
+                            <p class="m-0">I certify</p>
+                            <p class="m-0">that <span id="usDisplayHeOrShe2">he/she</span> does not receive (1)</p>
+                            <p class="m-0">that <span id="usDisplayHeOrShe3">he/she</span> receives (1) a scholarship
+                                grant
+                            </p>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="flex justify-between mt-20">
+                            <!-- Left Footer -->
+                            <div class="w-[48%]">
+                                <div class="mb-6">
+                                    <p class="m-0"><small>(Name-Title<br>and position of Signatory)</small></p>
+                                </div>
+
+                                <div class="mt-6">
+                                    <p class="m-0 font-bold">Payment method</p>
+                                    <p class="m-0 font-bold">Wire Transfer - Check - Cash</p>
+                                </div>
+
+                                <div class="mt-8">
+                                    <p class="m-0"><small>Student ID Number<br>or Social Security Number</small></p>
+                                    <p class="mt-5"><span id="usDisplayStudentId"
+                                            class="text-red-600 font-medium">"123456789"</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Right Footer -->
+                            <div class="w-[48%] text-center">
+                                <p class="m-0">Done at <span id="usDisplayCity" class="font-medium">Cambridge</span></p>
+                                <p class="m-0">On <span id="usDisplayDateIssued" class="font-medium">12/15/2025</span>
+                                </p>
+                                <p class="mt-8 font-bold">Signature and Seal</p>
+                                <div class="border border-black p-4 mt-5 min-h-[80px] flex items-center justify-center">
+                                    <span id="usDisplaySignature" class="text-2xl text-blue-900"
+                                        style="font-family: 'Dancing Script', cursive;">Signature</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-center mt-16">(1) Strike out as appropriate</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -846,8 +1100,64 @@
             ]
         };
 
+        // ========== US UNIVERSITY DATA ==========
+        const usUniversityData = {
+            universities: [
+                { name: "Harvard University", address: "Massachusetts Hall, Cambridge, MA 02138", city: "Cambridge", state: "MA" },
+                { name: "Stanford University", address: "450 Serra Mall, Stanford, CA 94305", city: "Stanford", state: "CA" },
+                { name: "Massachusetts Institute of Technology", address: "77 Massachusetts Ave, Cambridge, MA 02139", city: "Cambridge", state: "MA" },
+                { name: "Yale University", address: "New Haven, CT 06520", city: "New Haven", state: "CT" },
+                { name: "Princeton University", address: "Princeton, NJ 08544", city: "Princeton", state: "NJ" },
+                { name: "Columbia University", address: "116th St & Broadway, New York, NY 10027", city: "New York", state: "NY" },
+                { name: "University of Chicago", address: "5801 S Ellis Ave, Chicago, IL 60637", city: "Chicago", state: "IL" },
+                { name: "Duke University", address: "Durham, NC 27708", city: "Durham", state: "NC" },
+                { name: "Northwestern University", address: "633 Clark St, Evanston, IL 60208", city: "Evanston", state: "IL" },
+                { name: "University of California, Los Angeles", address: "405 Hilgard Ave, Los Angeles, CA 90095", city: "Los Angeles", state: "CA" },
+                { name: "University of California, Berkeley", address: "Berkeley, CA 94720", city: "Berkeley", state: "CA" },
+                { name: "University of Michigan", address: "Ann Arbor, MI 48109", city: "Ann Arbor", state: "MI" },
+                { name: "New York University", address: "70 Washington Square S, New York, NY 10012", city: "New York", state: "NY" },
+                { name: "University of Texas at Austin", address: "Austin, TX 78712", city: "Austin", state: "TX" },
+                { name: "University of Washington", address: "Seattle, WA 98195", city: "Seattle", state: "WA" }
+            ],
+            firstNames: [
+                "James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Christopher",
+                "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen",
+                "Emily", "Emma", "Olivia", "Sophia", "Isabella", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn"
+            ],
+            lastNames: [
+                "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+                "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+                "Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson"
+            ],
+            majors: [
+                "Computer Science", "Business Administration", "Psychology", "Biology", "Engineering",
+                "Economics", "Political Science", "English Literature", "Mathematics", "Chemistry",
+                "Physics", "Nursing", "Communications", "History", "Sociology",
+                "Finance", "Marketing", "Pre-Med", "Environmental Science", "Data Science"
+            ],
+            degrees: [
+                { name: "Bachelor of Science (B.S.)", type: "undergraduate", years: 4 },
+                { name: "Bachelor of Arts (B.A.)", type: "undergraduate", years: 4 },
+                { name: "Master of Science (M.S.)", type: "graduate", years: 2 },
+                { name: "Master of Arts (M.A.)", type: "graduate", years: 2 },
+                { name: "Master of Business Administration (MBA)", type: "graduate", years: 2 },
+                { name: "Doctor of Philosophy (Ph.D.)", type: "graduate", years: 5 }
+            ],
+            enrollmentStatus: ["Full-time", "Part-time"],
+            academicStanding: ["Good Standing", "Dean's List", "Honors"],
+            semesters: ["Fall", "Spring", "Summer"],
+            registrarNames: [
+                "Dr. Margaret Thompson", "Dr. Robert Chen", "Dr. Sarah Mitchell", "Dr. James Patterson",
+                "Dr. Emily Rodriguez", "Dr. Michael Brown", "Dr. Jennifer Davis", "Dr. William Harris"
+            ],
+            purposes: [
+                "employment verification", "visa purposes", "financial aid verification",
+                "insurance purposes", "scholarship application", "housing application"
+            ]
+        };
+
         // ========== MODE MANAGEMENT ==========
-        let currentMode = 'FR'; // 'FR' or 'K12'
+        let currentMode = 'FR'; // 'FR', 'K12', or 'US'
 
         function switchMode(mode) {
             currentMode = mode;
@@ -855,20 +1165,25 @@
             // Toggle form visibility
             document.getElementById('formFR').style.display = mode === 'FR' ? 'block' : 'none';
             document.getElementById('formK12').style.display = mode === 'K12' ? 'block' : 'none';
+            document.getElementById('formUS').style.display = mode === 'US' ? 'block' : 'none';
 
             // Toggle preview visibility
             document.getElementById('certificateContainer').style.display = mode === 'FR' ? 'block' : 'none';
             document.getElementById('paystubContainer').style.display = mode === 'K12' ? 'block' : 'none';
+            document.getElementById('usEnrollmentContainer').style.display = mode === 'US' ? 'block' : 'none';
 
             // Update button states
             document.getElementById('modeFR').classList.toggle('active', mode === 'FR');
             document.getElementById('modeK12').classList.toggle('active', mode === 'K12');
+            document.getElementById('modeUS').classList.toggle('active', mode === 'US');
 
             // Generate random data for the new mode
             if (mode === 'FR') {
                 generateRandom();
-            } else {
+            } else if (mode === 'K12') {
                 generateRandomK12();
+            } else if (mode === 'US') {
+                generateRandomUS();
             }
         }
 
@@ -1193,6 +1508,162 @@
             document.getElementById('k12NetPay').textContent = `$${netPay.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
         }
 
+        // ========== GENERATE RANDOM US ==========
+        function generateRandomUS() {
+            console.log('🎲 Génération US aléatoire...');
+
+            // Random student
+            const firstName = randomFromArray(usUniversityData.firstNames);
+            const lastName = randomFromArray(usUniversityData.lastNames);
+            const university = randomFromArray(usUniversityData.universities);
+            const degree = randomFromArray(usUniversityData.degrees);
+            const major = randomFromArray(usUniversityData.majors);
+            const enrollmentStatus = randomFromArray(usUniversityData.enrollmentStatus);
+            const academicStanding = randomFromArray(usUniversityData.academicStanding);
+            const registrar = randomFromArray(usUniversityData.registrarNames);
+            const purpose = randomFromArray(usUniversityData.purposes);
+
+            // Generate age-appropriate birth date based on degree type
+            let birthYear;
+            if (degree.type === 'undergraduate') {
+                // 18-23 years old
+                birthYear = randomInt(2001, 2007);
+            } else {
+                // Graduate: 22-30 years old
+                birthYear = randomInt(1995, 2003);
+            }
+            const birthMonth = padZero(randomInt(1, 12), 2);
+            const birthDay = padZero(randomInt(1, 28), 2);
+            const dateOfBirth = `${birthYear}-${birthMonth}-${birthDay}`;
+
+            // Generate 9-digit student ID
+            const studentId = padZero(randomInt(100000000, 999999999), 9);
+
+            // Calculate expected graduation based on degree type
+            const currentYear = new Date().getFullYear();
+            const yearsLeft = randomInt(1, degree.years);
+            const gradYear = currentYear + yearsLeft;
+            const gradMonths = ['May', 'December'];
+            const expectedGraduation = `${randomFromArray(gradMonths)} ${gradYear}`;
+
+            // Academic term
+            const semesters = ['Fall', 'Spring'];
+            const currentMonth = new Date().getMonth() + 1;
+            const currentSemester = currentMonth >= 8 || currentMonth <= 1 ? 'Fall' : 'Spring';
+            const termYear = currentMonth >= 8 ? currentYear : (currentMonth <= 1 ? currentYear - 1 : currentYear);
+            const academicTerm = `${currentSemester} ${termYear}`;
+
+            // Term dates
+            let termStart, termEnd;
+            if (currentSemester === 'Fall') {
+                termStart = `${termYear}-08-25`;
+                termEnd = `${termYear}-12-15`;
+            } else {
+                termStart = `${termYear}-01-15`;
+                termEnd = `${termYear}-05-15`;
+            }
+
+            // Date issued = today
+            const today = new Date().toISOString().split('T')[0];
+
+            // Fill form
+            document.getElementById('usUniversityName').value = university.name;
+            document.getElementById('usUniversityAddress').value = university.address;
+            document.getElementById('usFirstName').value = firstName;
+            document.getElementById('usLastName').value = lastName;
+            document.getElementById('usDateOfBirth').value = dateOfBirth;
+            document.getElementById('usStudentId').value = studentId;
+            document.getElementById('usMajor').value = major;
+            document.getElementById('usDegree').value = degree.name;
+            document.getElementById('usEnrollmentStatus').value = enrollmentStatus;
+            document.getElementById('usAcademicStanding').value = academicStanding;
+            document.getElementById('usExpectedGraduation').value = expectedGraduation;
+            document.getElementById('usAcademicTerm').value = academicTerm;
+            document.getElementById('usTermStart').value = termStart;
+            document.getElementById('usTermEnd').value = termEnd;
+            document.getElementById('usRegistrarName').value = registrar;
+            document.getElementById('usDateIssued').value = today;
+            document.getElementById('usPurpose').value = purpose;
+
+            // Update preview
+            updateUSPreview();
+            console.log('✅ Génération US terminée');
+        }
+
+        // ========== UPDATE US PREVIEW ==========
+        function updateUSPreview() {
+            // Get form values
+            const universityName = document.getElementById('usUniversityName').value;
+            const universityAddress = document.getElementById('usUniversityAddress').value;
+            const firstName = document.getElementById('usFirstName').value;
+            const lastName = document.getElementById('usLastName').value;
+            const dateOfBirth = document.getElementById('usDateOfBirth').value;
+            const studentId = document.getElementById('usStudentId').value;
+            const major = document.getElementById('usMajor').value;
+            const degree = document.getElementById('usDegree').value;
+            const academicTerm = document.getElementById('usAcademicTerm').value;
+            const termStart = document.getElementById('usTermStart').value;
+            const termEnd = document.getElementById('usTermEnd').value;
+            const registrarName = document.getElementById('usRegistrarName').value;
+            const dateIssued = document.getElementById('usDateIssued').value;
+
+            // Format dates as MM/DD/YYYY (US format)
+            const formatUSDate = (dateStr) => {
+                if (!dateStr) return '';
+                const date = new Date(dateStr + 'T00:00:00');
+                return `${padZero(date.getMonth() + 1, 2)}/${padZero(date.getDate(), 2)}/${date.getFullYear()}`;
+            };
+
+            // Calculate age from DOB
+            let age = 21;
+            if (dateOfBirth) {
+                const birthDate = new Date(dateOfBirth);
+                const today = new Date();
+                age = today.getFullYear() - birthDate.getFullYear();
+            }
+
+            // Get city from address (first part before comma)
+            const university = usUniversityData.universities.find(u => u.name === universityName);
+            const city = university ? university.city : 'City';
+
+            // Get academic year from term
+            const termParts = academicTerm.split(' ');
+            const termSeason = termParts[0];
+            const termYear = parseInt(termParts[1]) || 2025;
+            const academicYear = termSeason === 'Fall' ? `${termYear} - ${termYear + 1}` : `${termYear - 1} - ${termYear}`;
+
+            const fullName = `${lastName.toUpperCase()} ${firstName}`;
+
+            // Update header
+            document.getElementById('usDisplayUniversity').textContent = universityName || 'UNIVERSITY NAME';
+            document.getElementById('usDisplayAddress').textContent = universityAddress || 'Address, City, State ZIP';
+            document.getElementById('usDisplayAcademicYear').textContent = academicYear || '2025 - 2026';
+
+            // Update content
+            document.getElementById('usDisplayRegistrarTitle').textContent = 'Registrar';
+            document.getElementById('usDisplayRegistrarIntro').textContent = registrarName || 'Registrar Name';
+            document.getElementById('usDisplayHeOrShe').textContent = 'the';
+            document.getElementById('usDisplayFullName').textContent = fullName || 'LAST NAME First Name';
+            document.getElementById('usDisplayAge').textContent = age;
+            document.getElementById('usDisplayDegree').textContent = degree || 'Bachelor of Science';
+            document.getElementById('usDisplayMajor').textContent = major || 'Major';
+            document.getElementById('usDisplayEnrollmentDate').textContent = formatUSDate(termStart) || '08/25/2025';
+            document.getElementById('usDisplayExpirationDate').textContent = formatUSDate(termEnd) || '05/15/2026';
+
+            // Update certification box
+            document.getElementById('usDisplayHeOrShe2').textContent = 'he/she';
+            document.getElementById('usDisplayHeOrShe3').textContent = 'he/she';
+
+            // Update footer
+            document.getElementById('usDisplayStudentId').textContent = studentId || '123456789';
+            document.getElementById('usDisplayCity').textContent = city || 'City';
+            document.getElementById('usDisplayDateIssued').textContent = formatUSDate(dateIssued) || '12/15/2025';
+
+            // Signature cursive
+            const signatureName = registrarName ? registrarName.replace(/^Dr\.\s*/i, '') : 'Signature';
+            document.getElementById('usDisplaySignature').textContent = signatureName;
+        }
+
         // ========== SET LOGO WITH RASTERIZATION ==========
         // Charge le logo depuis Base64 (logos.js), le rasterise en PNG via Canvas
         function setLogo(logoPath) {
@@ -1239,7 +1710,14 @@
         // ========== DOWNLOAD AS IMAGE ==========
         async function downloadCertificate() {
             // Select the correct element based on current mode
-            const elementId = currentMode === 'FR' ? 'certificate' : 'paystub';
+            let elementId;
+            if (currentMode === 'FR') {
+                elementId = 'certificate';
+            } else if (currentMode === 'K12') {
+                elementId = 'paystub';
+            } else {
+                elementId = 'usEnrollment';
+            }
             const element = document.getElementById(elementId);
             console.log(`📥 Démarrage du téléchargement (mode: ${currentMode})...`);
 
@@ -1280,9 +1758,13 @@
                     const nom = document.getElementById('nomEtudiant').value || 'certificat';
                     const prenom = document.getElementById('prenomEtudiant').value || '';
                     filename = `certificat_${nom}_${prenom}.png`;
-                } else {
+                } else if (currentMode === 'K12') {
                     const empName = document.getElementById('k12EmpName').value || 'paystub';
                     filename = `paystub_${empName.replace(/\s+/g, '_')}.png`;
+                } else {
+                    const firstName = document.getElementById('usFirstName').value || 'enrollment';
+                    const lastName = document.getElementById('usLastName').value || '';
+                    filename = `enrollment_${firstName}_${lastName}.png`;
                 }
                 link.download = filename.toLowerCase().replace(/\s+/g, '_');
                 link.href = canvas.toDataURL('image/png', 1.0);
@@ -1300,16 +1782,20 @@
         function handleRandomize() {
             if (currentMode === 'FR') {
                 generateRandom();
-            } else {
+            } else if (currentMode === 'K12') {
                 generateRandomK12();
+            } else {
+                generateRandomUS();
             }
         }
 
         function handlePreviewUpdate() {
             if (currentMode === 'FR') {
                 updatePreview();
-            } else {
+            } else if (currentMode === 'K12') {
                 updateK12Preview();
+            } else {
+                updateUSPreview();
             }
         }
 
@@ -1333,6 +1819,47 @@
             k12Inputs.forEach(input => {
                 input.addEventListener('input', updateK12Preview);
                 input.addEventListener('change', updateK12Preview);
+            });
+
+            // Populate US form dropdowns
+            const usUniversitySelect = document.getElementById('usUniversityName');
+            usUniversityData.universities.forEach(uni => {
+                const option = document.createElement('option');
+                option.value = uni.name;
+                option.textContent = uni.name;
+                usUniversitySelect.appendChild(option);
+            });
+
+            const usMajorSelect = document.getElementById('usMajor');
+            usUniversityData.majors.forEach(major => {
+                const option = document.createElement('option');
+                option.value = major;
+                option.textContent = major;
+                usMajorSelect.appendChild(option);
+            });
+
+            const usDegreeSelect = document.getElementById('usDegree');
+            usUniversityData.degrees.forEach(degree => {
+                const option = document.createElement('option');
+                option.value = degree.name;
+                option.textContent = degree.name;
+                usDegreeSelect.appendChild(option);
+            });
+
+            // University select change - auto-fill address
+            usUniversitySelect.addEventListener('change', function () {
+                const selected = usUniversityData.universities.find(u => u.name === this.value);
+                if (selected) {
+                    document.getElementById('usUniversityAddress').value = selected.address;
+                }
+                updateUSPreview();
+            });
+
+            // Live update on input change for US form
+            const usInputs = document.querySelectorAll('#formUS input, #formUS select');
+            usInputs.forEach(input => {
+                input.addEventListener('input', updateUSPreview);
+                input.addEventListener('change', updateUSPreview);
             });
 
             // Generate random data on load (FR mode by default)

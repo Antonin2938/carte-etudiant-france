@@ -1,0 +1,221 @@
+# PROMPT: Ajouter un mode "US University Enrollment Certificate"
+
+## CONTEXTE
+Tu travailles sur un générateur de documents situé dans `c:\Users\FSOS\Documents\project\Certifs Generator\`.
+Le projet génère actuellement :
+- 🇫🇷 Certificat de scolarité français (universités françaises)
+- 🇺🇸 Pay Stub K12 (fiche de paie écoles US)
+
+L'utilisateur veut ajouter un **3ème mode** : un certificat d'inscription universitaire américain ("Enrollment Certificate" ou "Enrollment Verification Letter").
+
+## OBJECTIF
+Créer un mode "US University Certificate" qui génère un document officiel d'inscription universitaire américain, similaire au certificat français mais adapté au contexte US.
+
+## STRUCTURE EXISTANTE À SUIVRE
+
+### Fichier principal : `index.html`
+Le fichier contient déjà :
+1. **Mode Toggle** : Boutons pour basculer entre FR et K12 (ligne ~140)
+2. **Formulaires** : `#formFR` et `#formK12` (lignes ~160 et ~330)
+3. **Previews** : `#certificateContainer` (FR) et `#paystubContainer` (K12)
+4. **Données** : `etudiantsData`, `universitesData`, `k12Data`
+5. **Fonctions** : `switchMode()`, `generateRandom()`, `generateRandomK12()`, `updatePreview()`, `updateK12Preview()`
+
+### Ce qu'il faut ajouter :
+1. Un 3ème bouton dans le mode toggle : "🇺🇸 US Enrollment"
+2. Un nouveau formulaire `#formUS`
+3. Un nouveau preview `#usEnrollmentContainer`
+4. Nouvelles données `usUniversityData`
+5. Nouvelles fonctions `generateRandomUS()` et `updateUSPreview()`
+
+## DONNÉES US UNIVERSITY À CRÉER
+
+### Universités américaines (15-20 universités)
+```javascript
+const usUniversityData = {
+    universities: [
+        { name: "Harvard University", address: "Massachusetts Hall, Cambridge, MA 02138", city: "Cambridge", state: "MA" },
+        { name: "Stanford University", address: "450 Serra Mall, Stanford, CA 94305", city: "Stanford", state: "CA" },
+        { name: "MIT", address: "77 Massachusetts Ave, Cambridge, MA 02139", city: "Cambridge", state: "MA" },
+        { name: "Yale University", address: "New Haven, CT 06520", city: "New Haven", state: "CT" },
+        { name: "Princeton University", address: "Princeton, NJ 08544", city: "Princeton", state: "NJ" },
+        { name: "Columbia University", address: "116th St & Broadway, New York, NY 10027", city: "New York", state: "NY" },
+        { name: "University of Chicago", address: "5801 S Ellis Ave, Chicago, IL 60637", city: "Chicago", state: "IL" },
+        { name: "Duke University", address: "Durham, NC 27708", city: "Durham", state: "NC" },
+        { name: "Northwestern University", address: "633 Clark St, Evanston, IL 60208", city: "Evanston", state: "IL" },
+        { name: "UCLA", address: "405 Hilgard Ave, Los Angeles, CA 90095", city: "Los Angeles", state: "CA" },
+        { name: "UC Berkeley", address: "Berkeley, CA 94720", city: "Berkeley", state: "CA" },
+        { name: "University of Michigan", address: "Ann Arbor, MI 48109", city: "Ann Arbor", state: "MI" },
+        { name: "NYU", address: "70 Washington Square S, New York, NY 10012", city: "New York", state: "NY" },
+        { name: "University of Texas at Austin", address: "Austin, TX 78712", city: "Austin", state: "TX" },
+        { name: "University of Washington", address: "Seattle, WA 98195", city: "Seattle", state: "WA" }
+    ],
+    firstNames: [
+        "James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Christopher",
+        "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen",
+        "Emily", "Emma", "Olivia", "Sophia", "Isabella", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn"
+    ],
+    lastNames: [
+        "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+        "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+        "Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson"
+    ],
+    majors: [
+        "Computer Science", "Business Administration", "Psychology", "Biology", "Engineering",
+        "Economics", "Political Science", "English Literature", "Mathematics", "Chemistry",
+        "Physics", "Nursing", "Communications", "History", "Sociology",
+        "Finance", "Marketing", "Pre-Med", "Environmental Science", "Data Science"
+    ],
+    degrees: [
+        "Bachelor of Science (B.S.)", "Bachelor of Arts (B.A.)", "Master of Science (M.S.)",
+        "Master of Arts (M.A.)", "Master of Business Administration (MBA)", "Doctor of Philosophy (Ph.D.)"
+    ],
+    enrollmentStatus: ["Full-time", "Part-time"],
+    academicStanding: ["Good Standing", "Dean's List", "Honors"]
+};
+```
+
+### Format Student ID US
+- Format : 9 chiffres (ex: `123456789`)
+- Préfixe possible selon l'année d'entrée
+
+## DESIGN DU CERTIFICAT US
+
+### En-tête
+```
+[LOGO/SEAL PLACEHOLDER]
+UNIVERSITY NAME
+Office of the Registrar
+Address, City, State ZIP
+```
+
+### Titre
+```
+ENROLLMENT VERIFICATION LETTER
+```
+
+### Corps du texte (en anglais)
+```
+To Whom It May Concern:
+
+This letter certifies that [STUDENT NAME] (Student ID: [ID]) is currently enrolled 
+at [UNIVERSITY NAME] for the [SEMESTER] [YEAR] academic term.
+
+Student Information:
+• Full Name: [FIRST NAME] [LAST NAME]
+• Date of Birth: [MM/DD/YYYY]
+• Student ID: [9 digits]
+• Major/Program: [MAJOR]
+• Degree Program: [Bachelor of Science / Master of Arts / etc.]
+• Enrollment Status: [Full-time / Part-time]
+• Academic Standing: [Good Standing / Dean's List]
+• Expected Graduation: [Month Year]
+
+Academic Term: [Fall/Spring/Summer] [Year]
+Term Start Date: [Date]
+Term End Date: [Date]
+
+This verification is issued upon the student's request for [purpose - e.g., "employment verification", "visa purposes", "financial aid"].
+
+If you have any questions regarding this verification, please contact the Office of the Registrar.
+
+Sincerely,
+
+[REGISTRAR NAME]
+University Registrar
+[UNIVERSITY NAME]
+
+Date Issued: [MM/DD/YYYY]
+```
+
+### Pied de page
+```
+This document is for verification purposes only.
+Official transcripts are available upon request.
+```
+
+## FORMULAIRE US (Champs)
+
+### University Section
+- University Name (select depuis la liste)
+- Address (auto-rempli selon université)
+
+### Student Section
+- First Name
+- Last Name
+- Date of Birth
+- Student ID (9 chiffres, généré automatiquement)
+
+### Academic Section
+- Major/Program (select)
+- Degree Program (select: B.S., B.A., M.S., etc.)
+- Enrollment Status (Full-time / Part-time)
+- Academic Standing (Good Standing / Dean's List / Honors)
+- Expected Graduation (select : mois + année)
+
+### Term Section
+- Academic Term (Fall 2024 / Spring 2025 / Summer 2025)
+- Term Start Date (auto selon term)
+- Term End Date (auto selon term)
+
+### Registrar Section
+- Registrar Name (généré aléatoirement)
+- Date Issued (date du jour)
+
+## GÉNÉRATION ALÉATOIRE
+
+### Âge des étudiants
+- **Undergraduate** : 18-23 ans (né entre 2001 et 2006)
+- **Graduate** : 22-30 ans (né entre 1994 et 2002)
+
+### Semestres académiques US
+- **Fall**: Août - Décembre
+- **Spring**: Janvier - Mai
+- **Summer**: Juin - Août
+
+### Calcul Expected Graduation
+- Si Freshman → +4 ans
+- Si Sophomore → +3 ans
+- Si Junior → +2 ans
+- Si Senior → +1 an
+- Si Master → +2 ans
+- Si PhD → +4-5 ans
+
+## STYLE CSS
+- Police : Arial ou Times New Roman (officiel)
+- Fond : Blanc ou légèrement crème
+- Bordure : Optionnelle, fine
+- Logo/Seal : Placeholder avec texte stylisé du nom de l'université
+
+## INSTRUCTIONS D'IMPLÉMENTATION
+
+1. **Ajouter le bouton toggle** dans la section `.mode-toggle`
+2. **Créer le formulaire** `#formUS` avec tous les champs
+3. **Créer le preview** `#usEnrollmentContainer` avec le template du certificat
+4. **Ajouter les données** `usUniversityData` dans le script
+5. **Créer les fonctions** :
+   - `generateRandomUS()` : génère données aléatoires et remplit le formulaire
+   - `updateUSPreview()` : met à jour le preview en temps réel
+6. **Modifier `switchMode()`** pour gérer le 3ème mode
+7. **Modifier `downloadCertificate()`** pour télécharger le bon document
+8. **Ajouter les event listeners** pour le formulaire US
+
+## EXEMPLE DE RÉSULTAT ATTENDU
+
+Un document qui ressemble à une vraie lettre d'inscription universitaire américaine, avec :
+- En-tête universitaire officiel
+- Informations structurées sur l'étudiant
+- Dates du semestre
+- Signature du Registrar
+- Date d'émission
+- Disclaimer en bas
+
+## FICHIERS À MODIFIER
+- `index.html` : Ajouter tout le contenu (formulaire, preview, JS)
+
+## TESTS À EFFECTUER
+1. Le toggle bascule correctement entre les 3 modes
+2. Le bouton "Générer Aléatoirement" fonctionne pour US
+3. Les champs du formulaire mettent à jour le preview en temps réel
+4. Le téléchargement génère une image PNG correcte
+5. Le design est professionnel et réaliste
