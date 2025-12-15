@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin de Paie - Sopalai San</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Conteneur principal (la feuille de papier) */
+        .document-container {
+            background-color: white;
+            width: 850px;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        /* Logo et Header */
+        .top-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: bold;
+            border: 2px solid black;
+            padding: 5px 15px;
+            letter-spacing: 2px;
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 20px;
+        }
+
+        .company-info {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 45%;
+        }
+
+        .doc-title {
+            border: 2px solid #d9534f;
+            color: #d9534f;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 24px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Informations Employé et Résumé */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            border: 1px solid #999;
+            width: 48%;
+        }
+
+        .info-box-header {
+            background-color: #f9f9f9;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-bottom: 1px solid #999;
+        }
+
+        .info-box-content {
+            padding: 10px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Tableau Principal */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .main-table th,
+        .main-table td {
+            border: 1px solid #999;
+            padding: 6px 8px;
+        }
+
+        .main-table th {
+            background-color: #dcdcdc;
+            text-align: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .bg-grey {
+            background-color: #dcdcdc;
+            font-weight: bold;
+        }
+
+        /* Section Bas de page (YTD et Net Pay) */
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .ytd-section {
+            width: 40%;
+        }
+
+        .ytd-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .ytd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .ytd-table td {
+            border: 1px solid #999;
+            padding: 5px;
+        }
+
+        .net-pay-section {
+            width: 40%;
+        }
+
+        .net-pay-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .net-pay-box {
+            background-color: #2b5c22;
+            /* Vert foncé */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 1px solid black;
+        }
+
+        .disclaimer {
+            margin-top: 40px;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-container">
+
+        <div class="top-header">
+            <div class="logo">Q300</div>
+        </div>
+
+        <div class="company-header">
+            <div class="company-info">
+                <strong>Q300 Lower Division (Queens, NY)</strong><br>
+                28-37 29th St, Long Island City, NY 11102
+            </div>
+            <div class="doc-title">
+                EARNINGS<br>STATEMENT
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-box">
+                <div class="info-box-header">EMPLOYEE INFORMATION</div>
+                <div class="info-box-content">
+                    <strong>Name:</strong> Sopalai San<br>
+                    <strong>Employee ID:</strong> 003618<br>
+                    <strong>Department:</strong> Mathematics Department<br>
+                    <strong>Position:</strong> Teacher<br>
+                    <strong>Status:</strong> Full-time Active Faculty
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-header">PAY SUMMARY</div>
+                <div class="info-box-content">
+                    <strong>Pay Period:</strong> 2025-09-01 — 2025-11-30<br>
+                    <strong>Pay Date:</strong> 2025-11-30
+                </div>
+            </div>
+        </div>
+
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th colspan="4">EARNINGS</th>
+                    <th colspan="2">DEDUCTIONS</th>
+                </tr>
+                <tr>
+                    <th style="width: 25%">Description</th>
+                    <th class="text-center">Hours</th>
+                    <th class="text-center">Rate</th>
+                    <th class="text-right">Amount</th>
+                    <th style="width: 25%">Description</th>
+                    <th class="text-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Base Salary</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$5,000.00</td>
+                    <td>Federal Tax</td>
+                    <td class="text-right">$850.00</td>
+                </tr>
+                <tr>
+                    <td>Overtime</td>
+                    <td class="text-center">10</td>
+                    <td class="text-center">$40/hr</td>
+                    <td class="text-right">$400.00</td>
+                    <td>State Tax</td>
+                    <td class="text-right">$240.00</td>
+                </tr>
+                <tr>
+                    <td>Bonus</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">$300.00</td>
+                    <td>Social Security</td>
+                    <td class="text-right">$353.40</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Medicare</td>
+                    <td class="text-right">$82.65</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Health Insurance</td>
+                    <td class="text-right">$150.00</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Retirement (401k)</td>
+                    <td class="text-right">$200.00</td>
+                </tr>
+                <tr style="font-weight: bold;">
+                    <td colspan="2" style="border: none;"></td>
+                    <td class="text-right">Total :</td>
+                    <td class="text-right">$5,700.00</td>
+                    <td>Total Deductions:</td>
+                    <td class="text-right">$1,876.05</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer-section">
+            <div class="ytd-section">
+                <div class="ytd-header">YEAR-TO-DATE (YTD)</div>
+                <table class="ytd-table">
+                    <tr>
+                        <td>YTD Gross Pay:</td>
+                        <td class="text-right">$11,400.00</td>
+                    </tr>
+                    <tr>
+                        <td>YTD Deductions:</td>
+                        <td class="text-right">$3,752.10</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">YTD Net Pay:</td>
+                        <td class="text-right" style="font-weight: bold;">$7,647.90</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="net-pay-section">
+                <div class="net-pay-header">NET PAY DISTRIBUTION</div>
+                <div class="net-pay-box">
+                    $3,823.95
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            This document is a representation of earnings and deductions for the period specified. Please retain for
+            your records.
+        </div>
+
+    </div>
+
+</body>
+
+</html>

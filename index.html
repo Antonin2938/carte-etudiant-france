@@ -68,6 +68,51 @@
             min-height: 297mm;
         }
 
+        /* Pay stub page styling */
+        .paystub-page {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            width: 850px;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        /* Mode Toggle Styles */
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 1.5rem;
+            background: rgba(31, 41, 55, 0.8);
+            padding: 4px;
+            border-radius: 12px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mode-btn {
+            padding: 10px 24px;
+            border: none;
+            background: transparent;
+            color: #9ca3af;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .mode-btn:hover {
+            color: #e5e7eb;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
         /* Input focus effect */
         input:focus,
         select:focus,
@@ -89,6 +134,16 @@
                 <i class="fas fa-graduation-cap mr-3"></i>Générateur de Certificat
             </h1>
             <p class="text-gray-400">Créez des certificats de scolarité professionnels en quelques clics</p>
+
+            <!-- Mode Toggle -->
+            <div class="mode-toggle mt-4">
+                <button id="modeFR" class="mode-btn active" onclick="switchMode('FR')">
+                    🇫🇷 Certificat FR
+                </button>
+                <button id="modeK12" class="mode-btn" onclick="switchMode('K12')">
+                    🇺🇸 Pay Stub K12
+                </button>
+            </div>
         </header>
 
         <!-- Main Content - Two Columns -->
@@ -104,7 +159,8 @@
                     <i class="fas fa-shuffle mr-2"></i>Générer Aléatoirement
                 </button>
 
-                <div class="space-y-4">
+                <!-- FR Form -->
+                <div id="formFR" class="space-y-4">
                     <!-- Établissement Section -->
                     <div class="border-b border-gray-700 pb-4 mb-4">
                         <h3 class="text-lg font-semibold text-indigo-400 mb-4"><i
@@ -271,6 +327,112 @@
                     </div>
                 </div>
 
+                <!-- K12 Form (hidden by default) -->
+                <div id="formK12" class="space-y-4" style="display: none;">
+                    <!-- School Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-emerald-400 mb-4"><i class="fas fa-school mr-2"></i>School
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">School Name</label>
+                                <input type="text" id="k12SchoolName"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                    placeholder="Q300 Lower Division">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Address</label>
+                                <input type="text" id="k12SchoolAddress"
+                                    class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                    placeholder="28-37 29th St, Long Island City, NY">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employee Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-purple-400 mb-4"><i
+                                class="fas fa-user-tie mr-2"></i>Employee</h3>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                                    <input type="text" id="k12EmpName"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        placeholder="John Smith">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Employee ID</label>
+                                    <input type="text" id="k12EmpId"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        placeholder="003618">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Department</label>
+                                    <select id="k12Department"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                        <option>Mathematics Department</option>
+                                        <option>English Department</option>
+                                        <option>Science Department</option>
+                                        <option>History Department</option>
+                                        <option>Art Department</option>
+                                        <option>Physical Education</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Position</label>
+                                    <select id="k12Position"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg">
+                                        <option>Teacher</option>
+                                        <option>Assistant Principal</option>
+                                        <option>Counselor</option>
+                                        <option>Librarian</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings Section -->
+                    <div class="border-b border-gray-700 pb-4 mb-4">
+                        <h3 class="text-lg font-semibold text-green-400 mb-4"><i
+                                class="fas fa-dollar-sign mr-2"></i>Earnings</h3>
+                        <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Base Salary ($)</label>
+                                    <input type="number" id="k12BaseSalary"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        value="5000">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Bonus ($)</label>
+                                    <input type="number" id="k12Bonus"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        value="300">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Overtime Hours</label>
+                                    <input type="number" id="k12OvertimeHours"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        value="10">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-1">Overtime Rate
+                                        ($/hr)</label>
+                                    <input type="number" id="k12OvertimeRate"
+                                        class="w-full px-3 py-2 bg-gray-700/50 border border-gray-600 rounded-lg"
+                                        value="40">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Download Button -->
                 <button id="downloadBtn"
                     class="w-full mt-6 px-6 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl shadow-lg hover:from-emerald-700 hover:to-teal-700 hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] transition-all duration-300">
@@ -357,6 +519,225 @@
                         <p class="text-sm text-center mt-16">(1) Rayer la mention inutile</p>
                     </div>
                 </div>
+
+                <!-- K12 Pay Stub Preview (hidden by default) -->
+                <div id="paystubContainer" class="bg-gray-100 p-4 rounded-2xl shadow-2xl" style="display: none;">
+                    <div id="paystub" class="paystub-page"
+                        style="font-family: Arial, sans-serif; background-color: white; color: black; width: 850px; padding: 40px; box-sizing: border-box; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+
+                        <!-- NYC DOE Header -->
+                        <div
+                            style="text-align: center; margin-bottom: 20px; border-bottom: 3px solid #003366; padding-bottom: 15px;">
+                            <div style="font-size: 14px; color: #003366; font-weight: bold; margin-bottom: 5px;">NEW
+                                YORK CITY DEPARTMENT OF EDUCATION</div>
+                            <div id="k12Logo" style="font-size: 28px; font-weight: bold; color: #000; margin: 10px 0;">
+                                Q300 - THE SCHOOL FOR MATH, SCIENCE & TECHNOLOGY
+                            </div>
+                            <div id="k12CompanyAddress" style="font-size: 12px; color: #555;">28-37 29th Street, Long
+                                Island City, NY 11102 • District 30</div>
+                        </div>
+
+                        <!-- Document Title -->
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                            <div style="width: 50%;">
+                                <div style="font-size: 11px; color: #666;">School Name:</div>
+                                <div id="k12CompanyName" style="font-size: 14px; font-weight: bold;">Q300 Lower Division
+                                    (Queens, NY)</div>
+                            </div>
+                            <div
+                                style="border: 2px solid #003366; color: #003366; padding: 10px 20px; font-weight: bold; font-size: 20px; text-align: center; text-transform: uppercase;">
+                                EARNINGS<br>STATEMENT
+                            </div>
+                        </div>
+
+                        <!-- Info Section -->
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div style="border: 1px solid #999; width: 48%;">
+                                <div
+                                    style="background-color: #f9f9f9; font-weight: bold; padding: 5px 10px; border-bottom: 1px solid #999;">
+                                    EMPLOYEE INFORMATION</div>
+                                <div style="padding: 10px; line-height: 1.6; font-size: 14px;">
+                                    <strong>Name:</strong> <span id="k12DisplayName">Sopalai San</span><br>
+                                    <strong>Employee ID:</strong> <span id="k12DisplayId">003618</span><br>
+                                    <strong>Department:</strong> <span id="k12DisplayDept">Mathematics
+                                        Department</span><br>
+                                    <strong>Position:</strong> <span id="k12DisplayPosition">Teacher</span><br>
+                                    <strong>Status:</strong> Full-time Active Faculty
+                                </div>
+                            </div>
+                            <div style="border: 1px solid #999; width: 48%;">
+                                <div
+                                    style="background-color: #f9f9f9; font-weight: bold; padding: 5px 10px; border-bottom: 1px solid #999;">
+                                    PAY SUMMARY</div>
+                                <div style="padding: 10px; line-height: 1.6; font-size: 14px;">
+                                    <strong>Pay Period:</strong> <span id="k12PayPeriod">2025-09-01 —
+                                        2025-11-30</span><br>
+                                    <strong>Pay Date:</strong> <span id="k12PayDate">2025-11-30</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Table -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 14px;">
+                            <thead>
+                                <tr>
+                                    <th colspan="4"
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: left;">
+                                        EARNINGS</th>
+                                    <th colspan="2"
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: left;">
+                                        DEDUCTIONS</th>
+                                </tr>
+                                <tr>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; width: 25%;">
+                                        Description</th>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: center;">
+                                        Hours</th>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: center;">
+                                        Rate</th>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: right;">
+                                        Amount</th>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; width: 25%;">
+                                        Description</th>
+                                    <th
+                                        style="border: 1px solid #999; padding: 6px 8px; background-color: #dcdcdc; text-align: right;">
+                                        Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Base Salary</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px; text-align: center;">-</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px; text-align: center;">-</td>
+                                    <td id="k12DisplaySalary"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$5,000.00
+                                    </td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Federal Tax</td>
+                                    <td id="k12FedTax"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$850.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Overtime</td>
+                                    <td id="k12DisplayOTHours"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: center;">10</td>
+                                    <td id="k12DisplayOTRate"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: center;">$40/hr
+                                    </td>
+                                    <td id="k12DisplayOTAmount"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$400.00
+                                    </td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">State Tax</td>
+                                    <td id="k12StateTax"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$240.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Bonus</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px; text-align: center;">-</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px; text-align: center;">-</td>
+                                    <td id="k12DisplayBonus"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$300.00
+                                    </td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Social Security</td>
+                                    <td id="k12SS" style="border: 1px solid #999; padding: 6px 8px; text-align: right;">
+                                        $353.40</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">&nbsp;</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Medicare</td>
+                                    <td id="k12Medicare"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$82.65</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">&nbsp;</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Health Insurance</td>
+                                    <td id="k12Health"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$150.00
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">&nbsp;</td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Retirement (401k)</td>
+                                    <td id="k12Retirement"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$200.00
+                                    </td>
+                                </tr>
+                                <tr style="font-weight: bold;">
+                                    <td colspan="2" style="border: none;"></td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px; text-align: right;">Total:</td>
+                                    <td id="k12TotalEarnings"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$5,700.00
+                                    </td>
+                                    <td style="border: 1px solid #999; padding: 6px 8px;">Total Deductions:</td>
+                                    <td id="k12TotalDeductions"
+                                        style="border: 1px solid #999; padding: 6px 8px; text-align: right;">$1,876.05
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Footer Section -->
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="width: 40%;">
+                                <div
+                                    style="font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-size: 14px;">
+                                    YEAR-TO-DATE (YTD)</div>
+                                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                                    <tr>
+                                        <td style="border: 1px solid #999; padding: 5px;">YTD Gross Pay:</td>
+                                        <td id="k12YTDGross"
+                                            style="border: 1px solid #999; padding: 5px; text-align: right;">$11,400.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #999; padding: 5px;">YTD Deductions:</td>
+                                        <td id="k12YTDDeductions"
+                                            style="border: 1px solid #999; padding: 5px; text-align: right;">$3,752.10
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #999; padding: 5px; font-weight: bold;">YTD Net
+                                            Pay:</td>
+                                        <td id="k12YTDNet"
+                                            style="border: 1px solid #999; padding: 5px; text-align: right; font-weight: bold;">
+                                            $7,647.90</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="width: 40%;">
+                                <div
+                                    style="font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-size: 14px;">
+                                    NET PAY DISTRIBUTION</div>
+                                <div id="k12NetPay"
+                                    style="background-color: #2b5c22; color: white; padding: 15px; text-align: center; font-size: 24px; font-weight: bold; border: 1px solid black;">
+                                    $3,823.95</div>
+                            </div>
+                        </div>
+
+                        <!-- Disclaimer -->
+                        <div
+                            style="margin-top: 40px; font-size: 10px; color: #666; text-align: center; font-style: italic; border: 1px solid #ccc; padding: 5px;">
+                            This document is a representation of earnings and deductions for the period specified.
+                            Please retain for your records.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -437,6 +818,59 @@
             "assets/logos/strasbourg.svg",
             "assets/logos/toulouse.svg"
         ];
+
+        // ========== K12 DATA (US Schools) ==========
+        const k12Data = {
+            firstNames: [
+                "James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph",
+                "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica",
+                "Sarah", "Karen", "Nancy", "Lisa", "Margaret", "Betty", "Sandra", "Ashley"
+            ],
+            lastNames: [
+                "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+                "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
+                "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson"
+            ],
+            departments: [
+                "Mathematics Department", "English Department", "Science Department",
+                "History Department", "Art Department", "Physical Education",
+                "Music Department", "Foreign Languages", "Special Education"
+            ],
+            positions: ["Teacher", "Assistant Principal", "Counselor", "Librarian", "Department Head"],
+            schools: [
+                { name: "Q300 Lower Division", address: "28-37 29th St, Long Island City, NY 11102", logo: "Q300" },
+                { name: "PS 234 Independence School", address: "292 Greenwich St, New York, NY 10007", logo: "PS234" },
+                { name: "Brooklyn Tech High School", address: "29 Fort Greene Pl, Brooklyn, NY 11217", logo: "BTHS" },
+                { name: "Stuyvesant High School", address: "345 Chambers St, New York, NY 10282", logo: "STUY" },
+                { name: "Bronx High School of Science", address: "75 W 205th St, Bronx, NY 10468", logo: "BxSCI" }
+            ]
+        };
+
+        // ========== MODE MANAGEMENT ==========
+        let currentMode = 'FR'; // 'FR' or 'K12'
+
+        function switchMode(mode) {
+            currentMode = mode;
+
+            // Toggle form visibility
+            document.getElementById('formFR').style.display = mode === 'FR' ? 'block' : 'none';
+            document.getElementById('formK12').style.display = mode === 'K12' ? 'block' : 'none';
+
+            // Toggle preview visibility
+            document.getElementById('certificateContainer').style.display = mode === 'FR' ? 'block' : 'none';
+            document.getElementById('paystubContainer').style.display = mode === 'K12' ? 'block' : 'none';
+
+            // Update button states
+            document.getElementById('modeFR').classList.toggle('active', mode === 'FR');
+            document.getElementById('modeK12').classList.toggle('active', mode === 'K12');
+
+            // Generate random data for the new mode
+            if (mode === 'FR') {
+                generateRandom();
+            } else {
+                generateRandomK12();
+            }
+        }
 
         // ========== RANDOM HELPERS ==========
         function randomFromArray(arr) {
@@ -639,6 +1073,126 @@
             document.getElementById('certSignature').textContent = signatureName;
         }
 
+        // ========== GENERATE RANDOM K12 ==========
+        function generateRandomK12() {
+            console.log('🎲 Génération K12 aléatoire...');
+
+            // Random employee
+            const firstName = randomFromArray(k12Data.firstNames);
+            const lastName = randomFromArray(k12Data.lastNames);
+            const fullName = `${firstName} ${lastName}`;
+            const empId = padZero(randomInt(1000, 9999), 6);
+            const department = randomFromArray(k12Data.departments);
+            const position = randomFromArray(k12Data.positions);
+            const school = randomFromArray(k12Data.schools);
+
+            // Random earnings
+            const baseSalary = randomInt(4000, 7000);
+            const bonus = randomInt(0, 500);
+            const overtimeHours = randomInt(0, 20);
+            const overtimeRate = randomInt(35, 55);
+
+            // Fill K12 form
+            document.getElementById('k12SchoolName').value = school.name;
+            document.getElementById('k12SchoolAddress').value = school.address;
+            document.getElementById('k12EmpName').value = fullName;
+            document.getElementById('k12EmpId').value = empId;
+            document.getElementById('k12Department').value = department;
+            document.getElementById('k12Position').value = position;
+            document.getElementById('k12BaseSalary').value = baseSalary;
+            document.getElementById('k12Bonus').value = bonus;
+            document.getElementById('k12OvertimeHours').value = overtimeHours;
+            document.getElementById('k12OvertimeRate').value = overtimeRate;
+
+            // Update preview
+            updateK12Preview();
+            console.log('✅ Génération K12 terminée');
+        }
+
+        // ========== UPDATE K12 PREVIEW ==========
+        function updateK12Preview() {
+            const schoolName = document.getElementById('k12SchoolName').value;
+            const schoolAddress = document.getElementById('k12SchoolAddress').value;
+            const empName = document.getElementById('k12EmpName').value;
+            const empId = document.getElementById('k12EmpId').value;
+            const department = document.getElementById('k12Department').value;
+            const position = document.getElementById('k12Position').value;
+            const baseSalary = parseFloat(document.getElementById('k12BaseSalary').value) || 5000;
+            const bonus = parseFloat(document.getElementById('k12Bonus').value) || 0;
+            const otHours = parseFloat(document.getElementById('k12OvertimeHours').value) || 0;
+            const otRate = parseFloat(document.getElementById('k12OvertimeRate').value) || 40;
+
+            // Calculate earnings
+            const otAmount = otHours * otRate;
+            const grossPay = baseSalary + bonus + otAmount;
+
+            // Calculate deductions (approximate US rates)
+            const fedTax = grossPay * 0.17;
+            const stateTax = grossPay * 0.05;
+            const socialSecurity = grossPay * 0.062;
+            const medicare = grossPay * 0.0145;
+            const healthIns = 150;
+            const retirement = grossPay * 0.04;
+            const totalDeductions = fedTax + stateTax + socialSecurity + medicare + healthIns + retirement;
+            const netPay = grossPay - totalDeductions;
+
+            // YTD calculations (assume 2 months)
+            const ytdGross = grossPay * 2;
+            const ytdDeductions = totalDeductions * 2;
+            const ytdNet = netPay * 2;
+
+            // Update school info - display full school name for institutional identification
+            document.getElementById('k12Logo').textContent = schoolName;
+            document.getElementById('k12CompanyName').textContent = schoolName + ' (New York City)';
+            document.getElementById('k12CompanyAddress').textContent = schoolAddress + ' • NYC School District';
+
+            // Update employee info
+            document.getElementById('k12DisplayName').textContent = empName;
+            document.getElementById('k12DisplayId').textContent = empId;
+            document.getElementById('k12DisplayDept').textContent = department;
+            document.getElementById('k12DisplayPosition').textContent = position;
+
+            // Update pay period - ensure dates are within last 30 days
+            const today = new Date();
+            const endDate = today;
+            const startDate = new Date(today);
+            startDate.setDate(today.getDate() - 30); // 30 days ago
+
+            // Format dates as MM/DD/YYYY (US format)
+            const formatUSDate = (date) => {
+                const mm = String(date.getMonth() + 1).padStart(2, '0');
+                const dd = String(date.getDate()).padStart(2, '0');
+                const yyyy = date.getFullYear();
+                return `${mm}/${dd}/${yyyy}`;
+            };
+
+            document.getElementById('k12PayPeriod').textContent = `${formatUSDate(startDate)} — ${formatUSDate(endDate)}`;
+            document.getElementById('k12PayDate').textContent = formatUSDate(endDate);
+
+            // Update earnings
+            document.getElementById('k12DisplaySalary').textContent = `$${baseSalary.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12DisplayOTHours').textContent = otHours;
+            document.getElementById('k12DisplayOTRate').textContent = `$${otRate}/hr`;
+            document.getElementById('k12DisplayOTAmount').textContent = `$${otAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12DisplayBonus').textContent = `$${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12TotalEarnings').textContent = `$${grossPay.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+
+            // Update deductions
+            document.getElementById('k12FedTax').textContent = `$${fedTax.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12StateTax').textContent = `$${stateTax.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12SS').textContent = `$${socialSecurity.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12Medicare').textContent = `$${medicare.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12Health').textContent = `$${healthIns.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12Retirement').textContent = `$${retirement.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12TotalDeductions').textContent = `$${totalDeductions.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+
+            // Update YTD and Net Pay
+            document.getElementById('k12YTDGross').textContent = `$${ytdGross.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12YTDDeductions').textContent = `$${ytdDeductions.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12YTDNet').textContent = `$${ytdNet.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            document.getElementById('k12NetPay').textContent = `$${netPay.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        }
+
         // ========== SET LOGO WITH RASTERIZATION ==========
         // Charge le logo depuis Base64 (logos.js), le rasterise en PNG via Canvas
         function setLogo(logoPath) {
@@ -684,32 +1238,53 @@
 
         // ========== DOWNLOAD AS IMAGE ==========
         async function downloadCertificate() {
-            const certificate = document.getElementById('certificate');
-            console.log('📥 Démarrage du téléchargement...');
+            // Select the correct element based on current mode
+            const elementId = currentMode === 'FR' ? 'certificate' : 'paystub';
+            const element = document.getElementById(elementId);
+            console.log(`📥 Démarrage du téléchargement (mode: ${currentMode})...`);
 
             try {
                 // Capture avec html2canvas
-                const canvas = await html2canvas(certificate, {
+                const canvas = await html2canvas(element, {
                     scale: 3, // Haute résolution pour qualité A4
                     useCORS: true,
                     allowTaint: true,
                     backgroundColor: '#ffffff',
                     logging: false,
                     onclone: function (clonedDoc) {
-                        // Ajuster le titre pour le centrage vertical (-8px pour monter)
-                        const title = clonedDoc.querySelector('#certificate h2');
-                        if (title) {
-                            title.style.transform = 'translateY(-8px)';
+                        // Fix vertical alignment offset for K12 mode
+                        const clonedElement = clonedDoc.getElementById(elementId);
+                        if (clonedElement) {
+                            // Force line-height and vertical alignment fixes
+                            const allElements = clonedElement.querySelectorAll('*');
+                            allElements.forEach(el => {
+                                // Ensure consistent text rendering
+                                el.style.textRendering = 'geometricPrecision';
+                            });
+
+                            // Move content up to compensate for html2canvas offset
+                            // Note: transform doesn't work with html2canvas, use margin instead
+                            const allTableCells = clonedElement.querySelectorAll('td, th');
+                            allTableCells.forEach(cell => {
+                                cell.style.paddingTop = '3px';
+                                cell.style.paddingBottom = '3px';
+                            });
                         }
                     }
                 });
 
-
-                // Télécharger
+                // Télécharger avec nom approprié
                 const link = document.createElement('a');
-                const nom = document.getElementById('nomEtudiant').value || 'certificat';
-                const prenom = document.getElementById('prenomEtudiant').value || '';
-                link.download = `certificat_${nom}_${prenom}.png`.toLowerCase().replace(/\s+/g, '_');
+                let filename;
+                if (currentMode === 'FR') {
+                    const nom = document.getElementById('nomEtudiant').value || 'certificat';
+                    const prenom = document.getElementById('prenomEtudiant').value || '';
+                    filename = `certificat_${nom}_${prenom}.png`;
+                } else {
+                    const empName = document.getElementById('k12EmpName').value || 'paystub';
+                    filename = `paystub_${empName.replace(/\s+/g, '_')}.png`;
+                }
+                link.download = filename.toLowerCase().replace(/\s+/g, '_');
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
 
@@ -721,22 +1296,46 @@
             }
         }
 
+        // ========== MODE-AWARE HANDLERS ==========
+        function handleRandomize() {
+            if (currentMode === 'FR') {
+                generateRandom();
+            } else {
+                generateRandomK12();
+            }
+        }
+
+        function handlePreviewUpdate() {
+            if (currentMode === 'FR') {
+                updatePreview();
+            } else {
+                updateK12Preview();
+            }
+        }
+
         // ========== INIT ==========
         document.addEventListener('DOMContentLoaded', function () {
             console.log('✅ Données intégrées chargées');
 
             // Setup event listeners
-            document.getElementById('randomizeAllBtn').addEventListener('click', generateRandom);
+            document.getElementById('randomizeAllBtn').addEventListener('click', handleRandomize);
             document.getElementById('downloadBtn').addEventListener('click', downloadCertificate);
 
-            // Live update on input change
-            const inputs = document.querySelectorAll('input, select');
-            inputs.forEach(input => {
+            // Live update on input change for FR form
+            const frInputs = document.querySelectorAll('#formFR input, #formFR select');
+            frInputs.forEach(input => {
                 input.addEventListener('input', updatePreview);
                 input.addEventListener('change', updatePreview);
             });
 
-            // Generate random data on load
+            // Live update on input change for K12 form
+            const k12Inputs = document.querySelectorAll('#formK12 input, #formK12 select');
+            k12Inputs.forEach(input => {
+                input.addEventListener('input', updateK12Preview);
+                input.addEventListener('change', updateK12Preview);
+            });
+
+            // Generate random data on load (FR mode by default)
             generateRandom();
         });
     </script>
